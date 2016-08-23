@@ -16,6 +16,19 @@
     </div>
 
       <h1><%= @festival.name %></h1>
+    </div>
+    <div class="row">
+      <ul class="list-inline">
+        <% @dates.each do |date| %>
+        <li>
+          <%= link_to festival_path(@festival, date: date) do %>
+            <%= date %>
+          <% end %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <div class="row">
       <h2>List of concerts for this festival</h2>
       <% @concerts.each do |concert| %>
         <%= link_to concert_events_path(concert), method: :post do %>
