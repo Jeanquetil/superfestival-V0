@@ -47,7 +47,7 @@
       <!-- Login text link -->
       <% if user_signed_in? && current_user.facebook_picture_url %>
         <%= image_tag current_user.facebook_picture_url, height: 50, width: 50 %>
-      <% else %>q
+      <% else %>
       <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn-std" %>
       <% end %>
     <% end %>
