@@ -1,0 +1,25 @@
+# Add configuration values here, as shown below.
+#
+# pusher_app_id: "2954"
+# pusher_key: 7381a978f7dd7f9a1117
+# pusher_secret: abdc3b896a0ffb85d373
+# stripe_api_key: sk_test_2J0l093xOyW72XUYJHE4Dv2r
+# stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
+#
+# production:
+#   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
+#   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
+development:
+  FB_ID: "1662320050752056"
+  FB_SECRET: "626a4217d44e5d1503a66ebe8979775e"
+
+production:
+  FB_ID: "1662319344085460"
+  FB_SECRET: "fd2766cd19ca7d40fdc90b42e56e1e2e"
+
+development:
+  FB_ID: "1662320050752056"
+  FB_SECRET: "303b20a000a421a9d65627fdef00c5d3"
+  ALGOLIA_ID: "0DTTKELRMN"
+  ALGOLIA_API_KEY: "0dfc6d392e842863a6da28348ed9f83f"
+  ALGOLIA_ADMIN_KEY: "de776a69ba1fc557ea265b3df3e652d2"
