@@ -1,5 +1,5 @@
 class Timetable < ApplicationRecord
   belongs_to :user
   belongs_to :festival
-  has_many :events
+  has_many :events, dependent: :destroy
 end
