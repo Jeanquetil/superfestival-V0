@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>TODO</title>
-    <%= csrf_meta_tags %>
-    <%= action_cable_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <%= stylesheet_link_tag    'application', media: 'all' %>
-  </head>
-  <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-    <%= yield %>
-    <%= javascript_include_tag 'application' %>
-    <%= yield(:after_js) %>
-  </body>
+<head>
+  <title>TODO</title>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+</head>
+<body>
+  <%= render 'shared/navbar' %>
+  <%= render 'shared/flashes' %>
+  <%= yield %>
+
+  <script type="text/javascript">
+    var ENV_ALGOLIA_API_KEY = '<%= ENV["ALGOLIA_API_KEY"] %>';
+    var ENV_ALGOLIA_ID = '<%= ENV["ALGOLIA_ID"] %>';
+  </script>
+
+  <%= javascript_include_tag 'application' %>
+  <%= yield(:after_js) %>
+</body>
 </html>
