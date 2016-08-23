@@ -1,5 +1,12 @@
 <div class="wrapper">
   <div class="container">
+  <%= form_tag(youtubers_path, :method => "get", class: "navbar-wagon-search", id: "search-form", remote: true) do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Enter a category", class: "form-control border-radius" %>
+        <button type="submit" class="navbar-wagon-search-btn"><i class="fa fa-search"></i></button>
+      <% end %>
+  <a href="." title="Home"><img src="img/instant_search_logo@2x.png"/></a>
+    <div id="search-input"></div>
+    <div id="search-input-icon"></div>
     <div class="row">
       <h1><%= @festival.name %></h1>
       <h2>List of concerts for this festival</h2>
@@ -9,3 +16,17 @@
     </div>
   </div>
 </div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    var client = algoliasearch(ENV['ALGOLIA_ID'], ENV['ALGOLIA_API_KEY']);
+      var index = client.initIndex('Artist');
+      index.search('Artist', { hitsPerPage: 10, page: 0 })
+      .then(function searchDone(content) {
+      console.log(content)
+      })
+      .catch(function searchFailure(err) {
+    console.error(err);
+    });
+  <% end %>
+<% end %>
