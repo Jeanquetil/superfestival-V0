@@ -8,6 +8,7 @@ class FestivalsController < ApplicationController
     else
       @concerts = @festival.concerts
     end
+    @timetable = current_user.find_or_create_timetable_for!(@festival)
     authorize @festival
   end
 
