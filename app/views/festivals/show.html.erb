@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <div class="container">
+    <div class="row">
+      <h1><%= @festival.name %></h1>
+      <h2>List of concerts for this festival</h2>
+      <% @concerts.each do |r| %>
+        <%= render "concert", concert: r %>
+      <% end %>
+    </div>
+  </div>
+</div>
