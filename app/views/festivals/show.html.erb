@@ -8,10 +8,17 @@
     <div id="search-input"></div>
     <div id="search-input-icon"></div>
     <div class="row">
+
+    <div class="timetable">
+
+    </div>
+
       <h1><%= @festival.name %></h1>
       <h2>List of concerts for this festival</h2>
-      <% @concerts.each do |r| %>
-        <%= render "concert", concert: r %>
+      <% @concerts.each do |concert| %>
+        <%= link_to concert_events_path(concert), method: :post do %>
+          <%= render "concert", concert: concert %>
+        <% end %>
       <% end %>
     </div>
   </div>

@@ -1,19 +1,22 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:destroy]
 
+  def new
+    @event = Event.new
+  end
+
   def create
-    @event = Event.new(event_params)
-    @event.user = current_user
+    @concert = Concert.find(params[:concert_id])
+    @event = Event.new(concert: @concert)
+    @event.timetable = current_user.find_or_create_timetable_for!(@event.concert.festival)
+    # @event.user = current_user
     authorize @event
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
-      else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
+    @event.save
+    redirect_to festival_path(@event.concert.festival)
+  end
+
+  def show
+    raise
   end
 
   def destroy

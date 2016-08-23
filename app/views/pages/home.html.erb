@@ -1,3 +1,13 @@
+<div class="banner full-vh">
+  <div class="banner-content">
+    <h1>SUPER FESTIVAL</h1>
+    <p>manage your own festival's timetable</p>
+    <div id="scrolldown">
+      <a href="#" id="scroll"><i class="fa fa-caret-down fa-5x" aria-hidden="true"></i></a>
+    </div>
+  </div>
+</div>
+<div class="navbar-height" id="festivals"></div>
 <div class="wrapper">
   <div class="container">
     <div class="row">
@@ -8,3 +18,27 @@
     </div>
   </div>
 </div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function() {
+      $('.navbar-wagon-brand').hide();
+      $(window).scroll(function() {
+          var scroll = $(window).scrollTop();
+
+          if (scroll >= $(window).height()) {
+              $(".navbar-wagon").addClass("white-background");
+              $('.navbar-wagon-brand').show();
+          } else {
+              $(".navbar-wagon").removeClass("white-background");
+              $('.navbar-wagon-brand').hide();
+          }
+      });
+      $('#scroll').click(function() {
+        $('html, body').animate({
+          scrollTop: $("#festivals").offset().top
+        }, 1500);
+      });
+    });
+  <% end %>
+<% end %>
