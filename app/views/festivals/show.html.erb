@@ -19,9 +19,9 @@
     </div>
     <div class="row">
       <ul class="list-inline">
-        <% @dates.each do |date| %>
+        <% @dates.each_with_index do |date, index| %>
         <li>
-          <%= link_to festival_path(@festival, date: date) do %>
+          <%= link_to festival_path(@festival, date: date, day: index + 1) do %>
             <%= date %>
           <% end %>
         </li>
