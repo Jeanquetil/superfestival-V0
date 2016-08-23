@@ -56,7 +56,7 @@
       <% if user_signed_in? && current_user.facebook_picture_url %>
         <%= image_tag current_user.facebook_picture_url, height: 50, width: 50 %>
       <% else %>
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
+        <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "navbar-wagon-item navbar-wagon-link" %>
       <% end %>
     <% end %>
 
