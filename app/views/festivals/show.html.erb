@@ -22,7 +22,7 @@
         <% @dates.each_with_index do |date, index| %>
         <li>
           <%= link_to festival_path(@festival, date: date, day: index + 1) do %>
-            Day <%= index + 1 %>
+            Day<%= index + 1 %>
           <% end %>
         </li>
         <% end %>
