@@ -19,5 +19,18 @@
 }
 
 .navbar-height {
-  height: 70px;
+  height: 85px;
+}
+
+hr {
+  margin-top:17px;
+}
+
+h2 {
+  color: $bunker;
+  font-size: 50px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: bolder;
+  text-shadow: 4px 4px $iceberg;
 }

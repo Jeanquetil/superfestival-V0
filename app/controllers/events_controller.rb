@@ -8,11 +8,11 @@ class EventsController < ApplicationController
   def create
     @concert = Concert.find(params[:concert_id])
     @event = Event.new(concert: @concert)
-    @event.timetable = current_user.find_or_create_timetable_for!(@event.concert.festival)
+    @event.timetable = current_user.find_or_create_timetable_for!(@event.concert.festival, params[:day])
     # @event.user = current_user
     authorize @event
     @event.save
-    redirect_to festival_path(@event.concert.festival)
+    redirect_to festival_path(@event.concert.festival, date: params[:date], day: params[:day])
   end
 
   def show

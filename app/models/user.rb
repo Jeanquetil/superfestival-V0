@@ -26,10 +26,10 @@ class User < ApplicationRecord
     return user
   end
 
-  def find_or_create_timetable_for!(festival)
-    @timetable = Timetable.find_by(user: self, festival: festival)
+  def find_or_create_timetable_for!(festival, day)
+    @timetable = Timetable.find_by(user: self, festival: festival, day: day)
     unless @timetable
-      @timetable = Timetable.create!(user: self, festival: festival)
+      @timetable = Timetable.create!(user: self, festival: festival, day: day)
     end
     return @timetable
   end

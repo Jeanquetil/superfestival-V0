@@ -13,7 +13,7 @@
         <% @dates.each_with_index do |date, index| %>
         <li>
           <%= link_to festival_path(@festival, date: date, day: index + 1) do %>
-          <%= date %>
+          Day<%= index + 1 %>
           <% end %>
         </li>
         <% end %>
@@ -22,7 +22,7 @@
     <div class="row">
       <h2>List of concerts for this festival</h2>
       <% @concerts.each do |concert| %>
-      <%= link_to concert_events_path(concert), method: :post do %>
+      <%= link_to concert_events_path(concert, day: @dates.index(concert.start_time.to_date) + 1, date: concert.start_time.to_date), method: :post do %>
       <%= render "concert", concert: concert %>
       <% end %>
       <% end %>
