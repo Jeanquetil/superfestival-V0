@@ -1,6 +1,6 @@
 <div class="navbar-wagon navbar-fixed-top">
   <!-- Logo -->
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
+  <%= link_to root_path, class: "navbar-wagon-brand tohide" do %>
     <%= image_tag "logo.png" %>
   <% end %>
 
@@ -43,12 +43,19 @@
       </div>
 
     <% else %>
-
+    <%= link_to "#", class: "btn-std tohide" do %>
+      <%= t("Concept") %>
+    <% end %>
+    <%= link_to "#", class: "btn-std tohide" do %>
+      <%= t("Les festivals") %>
+    <% end %>
       <!-- Login text link -->
       <% if user_signed_in? && current_user.facebook_picture_url %>
         <%= image_tag current_user.facebook_picture_url, height: 50, width: 50 %>
       <% else %>
-      <%= link_to t(".sign_in", default: "Login"), new_user_session_path, class: "btn-std" %>
+        <%= link_to user_facebook_omniauth_authorize_path, class: "btn-std" do %>
+          <%= t(".sign_in", default: "login with ") %><i class="fa fa-facebook" aria-hidden="true"></i>
+        <% end %>
       <% end %>
     <% end %>
   </div>

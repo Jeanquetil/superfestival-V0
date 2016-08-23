@@ -1,8 +1,10 @@
 <div class="banner full-vh">
   <div class="banner-content">
     <h1>SUPER FESTIVAL</h1>
+    <br>
     <p>manage your own festival's timetable</p>
     <div id="scrolldown">
+      <%= image_tag "wave.png" %>
       <a href="#" id="scroll"><i class="fa fa-caret-down fa-5x" aria-hidden="true"></i></a>
     </div>
   </div>
@@ -11,7 +13,7 @@
 <div class="wrapper">
   <div class="container">
     <div class="row">
-      <h1>festivals</h1>
+      <h1 class="text-center">festivals</h1>
       <% @festivals.each do |r| %>
       <%= render "festival", festival: r %>
       <% end %>
@@ -22,16 +24,18 @@
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
     $(document).ready(function() {
-      $('.navbar-wagon-brand').hide();
+      $('.tohide').hide();
       $(window).scroll(function() {
           var scroll = $(window).scrollTop();
 
           if (scroll >= $(window).height()) {
-              $(".navbar-wagon").addClass("white-background");
-              $('.navbar-wagon-brand').show();
+              $(".navbar-wagon").addClass("lighter-background");
+              $(".navbar-wagon").addClass("box-shadow");
+              $('.tohide').show();
           } else {
-              $(".navbar-wagon").removeClass("white-background");
-              $('.navbar-wagon-brand').hide();
+              $(".navbar-wagon").removeClass("lighter-background");
+              $(".navbar-wagon").removeClass("box-shadow");
+              $('.tohide').hide();
           }
       });
       $('#scroll').click(function() {
