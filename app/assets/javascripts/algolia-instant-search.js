@@ -61,7 +61,7 @@ function app(opts) {
     );
 
   search.addWidget(
-    instantsearch.widgets.refinementList({
+    instantsearch.widgets.menu({
       container: '#concert_day',
       attributeName: 'concert_day',
       sortBy: ['isRefined', 'name:asc', 'count:desc'],
