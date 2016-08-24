@@ -22,9 +22,9 @@
     <div class="row">
       <h2>List of concerts for this festival</h2>
       <% @concerts.each do |concert| %>
-      <%= link_to concert_events_path(concert, day: @dates.index(concert.start_time.to_date) + 1, date: concert.start_time.to_date), method: :post do %>
-      <%= render "concert", concert: concert %>
-      <% end %>
+        <%= link_to concert_events_path(concert, day: @dates.index(concert.start_time.to_date) + 1, date: concert.start_time.to_date), method: :post do %>
+        <%= render "concert", concert: concert %>
+        <% end %>
       <% end %>
       <header>
         <div id="search-input"></div>
@@ -45,8 +45,9 @@
           <div class="hit-content">
             <h3 class="hit-genre">{{{stage}}}</h3>
             <h3>{{{artist_name}}}</h3>
-            <h2 class="hit-name">{{{_highlightResult.name.value}}}</h2>
-          </div>
+            <h3>{{{artist_genre}}}</h3>
+<!--             <h2 class="hit-name">{{{_highlightResult.name.value}}}</h2>
+ -->          </div>
         </div>
       </script>
 
