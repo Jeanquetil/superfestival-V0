@@ -9,11 +9,9 @@ class Concert < ApplicationRecord
   include AlgoliaSearch
 
   algoliasearch do
-    attributesToIndex ['stage', 'artist_name', 'artist_genre']
+    attributesToIndex ['stage', 'artist_name', 'artist_genre', 'start_time']
 
-    customRanking ['artist_id']
-
-    attributesForFaceting ['festival_name', 'day']
+    customRanking ['asc(artist_id)']
 
     add_attribute :artist_name do
       artist_name
@@ -27,9 +25,13 @@ class Concert < ApplicationRecord
       artist_genre
     end
 
-    # add_attribute :day do
-    #   day
-    # end
+    add_attribute :concert_day do
+      concert_day
+    end
+
+    add_attribute :festival_begin do
+      festival_begin
+    end
 
   end
 
@@ -44,5 +46,15 @@ class Concert < ApplicationRecord
   def artist_genre
     artist.genre
   end
+
+  def concert_day
+    ((end_time - 6.hours).to_date - festival_begin).to_i + 1
+  #   # day = @festival.concerts.of_the_day(params[:date].to_datetime + 6.hours)
+  #   # concert_events_path(concert, day: @dates.index(concert.start_time.to_date) + 1, date: concert.start_time.to_date), method: :post
+end
+
+def festival_begin
+  festival.start_date
+end
 
 end

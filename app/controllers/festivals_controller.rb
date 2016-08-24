@@ -1,5 +1,7 @@
 class FestivalsController < ApplicationController
 
+  skip_before_action :authenticate_user!, only: [ :index, :show]
+
   def show
     @festival = Festival.find(params[:id])
     @dates = (@festival.start_date..@festival.end_date).map(&:to_date)
