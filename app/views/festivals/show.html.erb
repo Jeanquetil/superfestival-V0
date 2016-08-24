@@ -1,25 +1,63 @@
  <div class="wrapper">
   <div class="container">
-    <div class="row">
-      <br>
-      <br>
-      <br>
 
-      <header>
-        <div id="search-input"></div>
-      </header>
+      <div class="row">
+        <h3>List of concerts for this festival</h3>
+        <div class="col-xs-12 col-lg-8">
+          <header>
+            <div id="search-input"></div>
+          </header>
 
-      <main>
-        <div id="left-column">
-          <div id="festival_name" class="facet"></div>
-          <div id="concert_day" class="facet"></div>
+          <main>
+            <div id="left-column">
+              <div id="festival_name" class="facet"></div>
+              <div id="concert_day" class="facet"></div>
+            </div>
+
+    <%# if params[:date] %>
+
+            <div id="right-column">
+              <div id="hits"></div>
+              <div id="pagination"></div>
+            </div>
+          </main>
+        </div>
+        <div class="col-xs-12 col-lg-4">
+        <h3>Timetable</h3>
+          <div class="timetable" style="height: <%= (@festival.concerts.order(:end_time).last.end_time - @festival.concerts.order(:start_time).first.start_time) / 72 %>px">
+              <div class="card-event" style="top:0px"><%= @festival.concerts.order(:start_time).first.start_time.to_time.strftime("%H:%M") %></div>
+              <% if @timetable %>
+                <% @timetable.events.each do |event| %>
+                  <%= render "event", event: event %>
+                <% end %>
+              <% end %>
+              <div class="card-event" style="bottom:0px"><%= @festival.concerts.order(:end_time).last.end_time.to_time.strftime("%H:%M") %></div>
+          </div>
         </div>
 
-        <div id="right-column">
-          <div id="hits"></div>
-          <div id="pagination"></div>
-        </div>
-      </main>
+<!--     <%# else %>
+      <div class="col-xs-12">
+        <header>
+          <div id="search-input"></div>
+        </header>
+
+        <main>
+          <div id="left-column">
+            <div id="festival_name" class="facet"></div>
+            <div id="concert_day" class="facet"></div>
+          </div>
+
+          <div id="right-column">
+            <div id="hits"></div>
+            <div id="pagination"></div>
+          </div>
+        </main>
+      </div>
+    <%# end %> -->
+
+      <br>
+      <br>
+      <br>
 
       <!-- /INTERFACE -->
 

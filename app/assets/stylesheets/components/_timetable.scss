@@ -1,0 +1,13 @@
+.timetable {
+  background-color: $cream;
+  position:relative;
+}
+
+.timetable .card-event {
+  position:absolute;
+  width:100%;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+}
+

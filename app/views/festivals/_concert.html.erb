@@ -1,6 +1,10 @@
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-  <div class="border">
-    <h4><%= concert.artist.name %></h4>
-    <p><%= concert.start_time.to_date  %></p>
-  </div>
-</div>
+<% @concerts.each do |concert| %>
+  <%= link_to concert_events_path(concert, day: @dates.index(concert.start_time.to_date) + 1, date: concert.start_time.to_date), method: :post do %>
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+      <div class="border">
+        <h4><%= concert.artist.name %></h4>
+        <p><%= concert.start_time.to_date  %></p>
+      </div>
+    </div>
+  <% end %>
+<% end %>
