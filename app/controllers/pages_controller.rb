@@ -3,6 +3,6 @@ class PagesController < ApplicationController
   skip_after_action :verify_authorized, only: [ :home ]
 
   def home
-    @festivals = Festival.all
+    @festivals = Festival.where("end_date > ?", Date.today)
   end
 end

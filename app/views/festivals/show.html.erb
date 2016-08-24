@@ -1,54 +1,63 @@
  <div class="wrapper">
   <div class="container">
-    <div class="row">
 
-      <h1><%= @festival.name %></h1>
-    </div>
-    <div class="row">
-      <ul class="list-inline">
-        <% @dates.each_with_index do |date, index| %>
-        <li>
-          <%= link_to festival_path(@festival, date: date, day: index + 1) do %>
-          Day<%= index + 1 %>
-          <% end %>
-        </li>
-        <% end %>
-      </ul>
-    </div>
-    <% if params[:date] %>
       <div class="row">
         <h3>List of concerts for this festival</h3>
         <div class="col-xs-12 col-lg-8">
-            <%= render "concert" %>
+          <header>
+            <div id="search-input"></div>
+          </header>
+
+          <main>
+            <div id="left-column">
+              <div id="festival_name" class="facet"></div>
+              <div id="concert_day" class="facet"></div>
+            </div>
+
+    <%# if params[:date] %>
+
+            <div id="right-column">
+              <div id="hits"></div>
+              <div id="pagination"></div>
+            </div>
+          </main>
         </div>
         <div class="col-xs-12 col-lg-4">
         <h3>Timetable</h3>
-          <div class="timetable" style="height: <%= (@concerts.order(:end_time).last.end_time - @concerts.order(:start_time).first.start_time) / 72 %>px">
-              <div class="card-event" style="top:0px"><%= @concerts.order(:start_time).first.start_time.to_time.strftime("%H:%M") %></div>
+          <div class="timetable" style="height: <%= (@festival.concerts.order(:end_time).last.end_time - @festival.concerts.order(:start_time).first.start_time) / 72 %>px">
+              <div class="card-event" style="top:0px"><%= @festival.concerts.order(:start_time).first.start_time.to_time.strftime("%H:%M") %></div>
               <% if @timetable %>
                 <% @timetable.events.each do |event| %>
                   <%= render "event", event: event %>
                 <% end %>
               <% end %>
-              <div class="card-event" style="bottom:0px"><%= @concerts.order(:end_time).last.end_time.to_time.strftime("%H:%M") %></div>
+              <div class="card-event" style="bottom:0px"><%= @festival.concerts.order(:end_time).last.end_time.to_time.strftime("%H:%M") %></div>
           </div>
         </div>
-    <% else %>
+
+<!--     <%# else %>
       <div class="col-xs-12">
-          <%= render "concert" %>
+        <header>
+          <div id="search-input"></div>
+        </header>
+
+        <main>
+          <div id="left-column">
+            <div id="festival_name" class="facet"></div>
+            <div id="concert_day" class="facet"></div>
+          </div>
+
+          <div id="right-column">
+            <div id="hits"></div>
+            <div id="pagination"></div>
+          </div>
+        </main>
       </div>
-    <% end %>
+    <%# end %> -->
 
-      <header>
-        <div id="search-input"></div>
-      </header>
-
-      <main>
-        <div id="right-column">
-          <div id="hits"></div>
-          <div id="pagination"></div>
-        </div>
-      </main>
+      <br>
+      <br>
+      <br>
 
       <!-- /INTERFACE -->
 
@@ -56,13 +65,20 @@
       <script type="text/html" id="hit-template">
         <div class="hit">
           <div class="hit-content">
-            <h3 class="hit-genre">{{{stage}}}</h3>
-            <h3>{{{artist_name}}}</h3>
-            <h3>{{{artist_genre}}}</h3>
-<!--             <h2 class="hit-name">{{{_highlightResult.name.value}}}</h2>
- -->          </div>
+
+            <a href="{{ event_url }}" data-method="post">
+              {{ artist_name }} - {{ artist_genre}}
+            </a>
+          </div>
         </div>
       </script>
+
+      <script type="text/html" id="no-results-template">
+        <div id="no-results-message">
+          <p>We didn't find any results for the search <em>"{{query}}"</em>.</p>
+        </div>
+      </script>
+      <!-- /TEMPLATES -->
 
       <script type="text/html" id="no-results-template">
         <div id="no-results-message">
