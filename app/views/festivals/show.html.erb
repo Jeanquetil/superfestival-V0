@@ -2,10 +2,6 @@
   <div class="container">
     <div class="row">
 
-      <div class="timetable">
-
-      </div>
-
       <h1><%= @festival.name %></h1>
     </div>
     <div class="row">
@@ -19,13 +15,29 @@
         <% end %>
       </ul>
     </div>
-    <div class="row">
-      <h3>List of concerts for this festival</h3>
-      <% @concerts.each do |concert| %>
-        <%= link_to concert_events_path(concert, day: @dates.index(concert.start_time.to_date) + 1, date: concert.start_time.to_date), method: :post do %>
-        <%= render "concert", concert: concert %>
-        <% end %>
-      <% end %>
+    <% if params[:date] %>
+      <div class="row">
+        <h3>List of concerts for this festival</h3>
+        <div class="col-xs-12 col-lg-8">
+            <%= render "concert" %>
+        </div>
+        <div class="col-xs-12 col-lg-4">
+        <h3>Timetable</h3>
+          <div class="timetable" style="height: <%= (@concerts.order(:end_time).last.end_time - @concerts.order(:start_time).first.start_time) / 72 %>px">
+              <div class="card-event" style="top:0px"><%= @concerts.order(:start_time).first.start_time.to_time.strftime("%H:%M") %></div>
+              <% if @timetable %>
+                <% @timetable.events.each do |event| %>
+                  <%= render "event", event: event %>
+                <% end %>
+              <% end %>
+              <div class="card-event" style="bottom:0px"><%= @concerts.order(:end_time).last.end_time.to_time.strftime("%H:%M") %></div>
+          </div>
+        </div>
+    <% else %>
+      <div class="col-xs-12">
+          <%= render "concert" %>
+      </div>
+    <% end %>
 
       <header>
         <div id="search-input"></div>
@@ -64,6 +76,3 @@
     </div>
   </div>
 </div>
-
-
--->
