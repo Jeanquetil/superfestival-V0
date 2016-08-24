@@ -33,6 +33,9 @@ class Concert < ApplicationRecord
       festival_begin
     end
 
+    add_attribute :event_url do
+      event_url
+    end
   end
 
   def artist_name
@@ -49,12 +52,16 @@ class Concert < ApplicationRecord
 
   def concert_day
     ((end_time - 6.hours).to_date - festival_begin).to_i + 1
-  #   # day = @festival.concerts.of_the_day(params[:date].to_datetime + 6.hours)
-  #   # concert_events_path(concert, day: @dates.index(concert.start_time.to_date) + 1, date: concert.start_time.to_date), method: :post
-end
+  end
 
-def festival_begin
-  festival.start_date
-end
+  def festival_begin
+    festival.start_date
+  end
+
+  def event_url
+    dates = (self.festival.start_date..self.festival.end_date).map(&:to_date)
+    event_url = "/concerts/#{self.id}/events/?day=#{dates.index(self.start_time.to_date) + 1}"
+    return event_url
+  end
 
 end
