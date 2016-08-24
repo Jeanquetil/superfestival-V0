@@ -9,10 +9,23 @@ class EventsController < ApplicationController
     @concert = Concert.find(params[:concert_id])
     @event = Event.new(concert: @concert)
     @event.timetable = current_user.find_or_create_timetable_for!(@event.concert.festival, params[:day])
-    # @event.user = current_user
     authorize @event
-    @event.save
-    redirect_to festival_path(@event.concert.festival, date: params[:date], day: params[:day])
+    validation = []
+    @event.timetable.events.each do |event|
+      if (event.concert.start_time < @event.concert.end_time && event.concert.end_time > @event.concert.start_time)
+      # if ((event.concert.start_time <= @event.concert.start_time && @event.concert.start_time <= event.concert.end_time) || (event.concert.start_time <= @event.concert.end_time && @event.concert.end_time <= event.concert.end_time)) || (@event.concert.start_time <= event.concert.start_time && event.concert.start_time <= @event.concert.end_time)
+        validation << false
+      else
+        validation << true
+      end
+
+    end
+    if validation.include?(false)
+      redirect_to festival_path(@event.concert.festival, date: params[:date], day: params[:day])
+    else
+      @event.save
+      redirect_to festival_path(@event.concert.festival, date: params[:date], day: params[:day])
+    end
   end
 
   def show
