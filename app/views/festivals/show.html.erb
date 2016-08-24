@@ -1,14 +1,20 @@
  <div class="wrapper">
   <div class="container">
     <div class="row">
-    <br>
-    <br>
-    <br>
+      <br>
+      <br>
+      <br>
+
       <header>
         <div id="search-input"></div>
       </header>
 
       <main>
+        <div id="left-column">
+          <div id="festival_name" class="facet"></div>
+          <div id="concert_day" class="facet"></div>
+        </div>
+
         <div id="right-column">
           <div id="hits"></div>
           <div id="pagination"></div>
@@ -21,12 +27,20 @@
       <script type="text/html" id="hit-template">
         <div class="hit">
           <div class="hit-content">
+
             <a href="{{ event_url }}" data-method="post">
               {{ artist_name }} - {{ artist_genre}}
             </a>
           </div>
         </div>
       </script>
+
+      <script type="text/html" id="no-results-template">
+        <div id="no-results-message">
+          <p>We didn't find any results for the search <em>"{{query}}"</em>.</p>
+        </div>
+      </script>
+      <!-- /TEMPLATES -->
 
       <script type="text/html" id="no-results-template">
         <div id="no-results-message">
