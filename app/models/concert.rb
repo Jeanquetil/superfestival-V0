@@ -27,10 +27,9 @@ class Concert < ApplicationRecord
       artist_genre
     end
 
-    # add_attribute :day do
-    #   day
-    # end
-
+    add_attribute :event_url do
+      event_url
+    end
   end
 
   def artist_name
@@ -43,6 +42,12 @@ class Concert < ApplicationRecord
 
   def artist_genre
     artist.genre
+  end
+
+  def event_url
+    dates = (self.festival.start_date..self.festival.end_date).map(&:to_date)
+    event_url = "/concerts/#{self.id}/events/?day=#{dates.index(self.start_time.to_date) + 1}"
+    return event_url
   end
 
 end
