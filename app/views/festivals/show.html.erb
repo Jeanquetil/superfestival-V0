@@ -14,7 +14,7 @@
               <div id="concert_day" class="facet"></div>
             </div>
 
-    <%# if params[:date] %>
+    <% if params[:day] %>
 
             <div id="right-column">
               <div id="hits"></div>
@@ -24,18 +24,18 @@
         </div>
         <div class="col-xs-12 col-lg-4">
         <h3>Timetable</h3>
-          <div class="timetable" style="height: <%= (@festival.concerts.order(:end_time).last.end_time - @festival.concerts.order(:start_time).first.start_time) / 72 %>px">
-              <div class="card-event" style="top:0px"><%= @festival.concerts.order(:start_time).first.start_time.to_time.strftime("%H:%M") %></div>
+          <div class="timetable" style="height: <%= (@concerts.order(:end_time).last.end_time - @concerts.order(:start_time).first.start_time) / 72 %>px">
+              <div class="card-event" style="top:0px"><%= @concerts.order(:start_time).first.start_time.to_time.strftime("%H:%M") %></div>
               <% if @timetable %>
                 <% @timetable.events.each do |event| %>
                   <%= render "event", event: event %>
                 <% end %>
               <% end %>
-              <div class="card-event" style="bottom:0px"><%= @festival.concerts.order(:end_time).last.end_time.to_time.strftime("%H:%M") %></div>
+              <div class="card-event" style="bottom:0px"><%= @concerts.order(:end_time).last.end_time.to_time.strftime("%H:%M") %></div>
           </div>
         </div>
 
-<!--     <%# else %>
+      <% else %>
       <div class="col-xs-12">
         <header>
           <div id="search-input"></div>
@@ -53,7 +53,7 @@
           </div>
         </main>
       </div>
-    <%# end %> -->
+    <% end %>
 
       <br>
       <br>

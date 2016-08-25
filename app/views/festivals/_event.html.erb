@@ -1,4 +1,4 @@
-<div class="border card-event" style="top:<%= (event.concert.start_time - @festival.concerts.order(:start_time).first.start_time) / 72 %>px;height: <%= (event.concert.end_time - event.concert.start_time) / 72 %>px;">
+<div class="border card-event" style="top:<%= (event.concert.start_time - @concerts.order(:start_time).first.start_time) / 72 %>px;height: <%= (event.concert.end_time - event.concert.start_time) / 72 %>px;">
   <h4><%= event.concert.artist.name %> // <%= event.concert.start_time.to_time.strftime("%H:%M") %> - <%= event.concert.end_time.to_time.strftime("%H:%M") %></h4>
 </div>
 
