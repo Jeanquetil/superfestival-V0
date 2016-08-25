@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :festivals, only: :show
   resources :concerts, only: [] do
-    resources :events, only: [:create]
+    resources :events, only: [:create, :destroy]
   end
 
   get 'festivals/:festival_id/timetable/:day' => "festivals#display_timetable", as: :display_timetable
