@@ -3,8 +3,7 @@ class Concert < ApplicationRecord
   belongs_to :festival
   belongs_to :artist
   has_many :events
-
-  scope :of_the_day, -> (datetime) { where("? <= start_time AND start_time < ?", datetime, datetime + 1.day)}
+  validates :day, presence: true
 
   include AlgoliaSearch
 
@@ -51,7 +50,7 @@ class Concert < ApplicationRecord
   end
 
   def concert_day
-    ((end_time - 6.hours).to_date - festival_begin).to_i + 1
+    self.day
   end
 
   def festival_begin
@@ -59,8 +58,7 @@ class Concert < ApplicationRecord
   end
 
   def event_url
-    dates = (self.festival.start_date..self.festival.end_date).map(&:to_date)
-    event_url = "/concerts/#{self.id}/events/?day=#{dates.index(self.start_time.to_date) + 1}"
+    event_url = "/concerts/#{self.id}/events/?day=#{self.day}"
     return event_url
   end
 
