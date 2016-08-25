@@ -1,20 +1,54 @@
  <div class="wrapper">
   <div class="container">
 
-      <div class="row">
-        <h3>List of concerts for this festival</h3>
-        <div class="col-xs-12 col-lg-8">
+    <div class="row">
+      <h3>List of concerts for this festival</h3>
+      <div class="col-xs-12 col-lg-8">
+        <header>
+          <div id="search-input"></div>
+        </header>
+
+        <main>
+          <div id="left-column">
+            <div id="concert_day" class="facet">
+            </div>
+          </div>
+          <% if params[:day] %>
+
+          <div id="right-column">
+            <div id="hits"></div>
+            <div id="pagination"></div>
+          </div>
+        </main>
+        <div class="col-xs-12 col-lg-4">
+          <h3>Timetable</h3>
+          <div class="timetable" style="height: <%= @day_duration / 72 %>px">
+            <div class="card-event" style="top:0px"><%= @day_begin.to_time.strftime("%H:%M") %></div>
+
+            <div class="border-top card-event" style="top:<%= @day_begin.to_i / 7200000000 %>px;height: <%= 3600 / 72 %>px;">
+              <h4>TEST</h4>
+            </div>
+            <% if @timetable %>
+            <% @timetable.events.each do |event| %>
+            <%= render "event", event: event %>
+            <% end %>
+            <% end %>
+            <div class="card-event" style="bottom:0px"><%= @day_end.to_time.strftime("%H:%M") %></div>
+          </div>
+        </div>
+
+        <span id="festival_name" class="facet hidden"></span>
+
+        <% else %>
+        <div class="col-xs-12">
           <header>
             <div id="search-input"></div>
           </header>
 
           <main>
             <div id="left-column">
-              <div id="festival_name" class="facet"></div>
               <div id="concert_day" class="facet"></div>
             </div>
-
-    <% if params[:day] %>
 
             <div id="right-column">
               <div id="hits"></div>
@@ -22,77 +56,61 @@
             </div>
           </main>
         </div>
-        <div class="col-xs-12 col-lg-4">
-        <h3>Timetable</h3>
-          <div class="timetable" style="height: <%= @day_duration / 72 %>px">
-              <div class="card-event" style="top:0px"><%= @day_begin.to_time.strftime("%H:%M") %></div>
 
-                <div class="border-top card-event" style="top:<%= @day_begin.to_i / 7200000000 %>px;height: <%= 3600 / 72 %>px;">
-                  <h4>TEST</h4>
-                </div>
-                  <% if @timetable %>
-                    <% @timetable.events.each do |event| %>
-                      <%= render "event", event: event %>
-                    <% end %>
-                  <% end %>
-              <div class="card-event" style="bottom:0px"><%= @day_end.to_time.strftime("%H:%M") %></div>
+        <span id="festival_name" class="facet hidden"></span>
+        <% end %>
+
+        <br>
+        <br>
+        <br>
+
+        <!-- /INTERFACE -->
+
+        <!-- TEMPLATES -->
+        <script type="text/html" id="hit-template">
+          <div class="hit">
+            <div class="hit-content">
+
+              <a href="{{ event_url }}" data-method="post">
+                {{ artist_name }} - {{ artist_genre}}
+              </a>
+            </div>
           </div>
-        </div>
+        </script>
 
-      <% else %>
-      <div class="col-xs-12">
-        <header>
-          <div id="search-input"></div>
-        </header>
-
-        <main>
-          <div id="left-column">
-            <div id="festival_name" class="facet"></div>
-            <div id="concert_day" class="facet"></div>
+        <script type="text/html" id="no-results-template">
+          <div id="no-results-message">
+            <p>We didn't find any results for the search <em>"{{query}}"</em>.</p>
           </div>
+        </script>
+        <!-- /TEMPLATES -->
 
-          <div id="right-column">
-            <div id="hits"></div>
-            <div id="pagination"></div>
+        <script type="text/html" id="no-results-template">
+          <div id="no-results-message">
+            <p>We didn't find any results for the search <em>"{{query}}"</em>.</p>
           </div>
-        </main>
+        </script>
+        <!-- /TEMPLATES -->
+
+        <!-- SCRIPTS -->
+
+        <script src="//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+
       </div>
-    <% end %>
-
-      <br>
-      <br>
-      <br>
-
-      <!-- /INTERFACE -->
-
-      <!-- TEMPLATES -->
-      <script type="text/html" id="hit-template">
-        <div class="hit">
-          <div class="hit-content">
-
-            <a href="{{ event_url }}" data-method="post">
-              {{ artist_name }} - {{ artist_genre}}
-            </a>
-          </div>
-        </div>
-      </script>
-
-      <script type="text/html" id="no-results-template">
-        <div id="no-results-message">
-          <p>We didn't find any results for the search <em>"{{query}}"</em>.</p>
-        </div>
-      </script>
-      <!-- /TEMPLATES -->
-
-      <script type="text/html" id="no-results-template">
-        <div id="no-results-message">
-          <p>We didn't find any results for the search <em>"{{query}}"</em>.</p>
-        </div>
-      </script>
-      <!-- /TEMPLATES -->
-
-      <!-- SCRIPTS -->
-      <script src="//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
     </div>
   </div>
-</div>
+  <% content_for :after_js do %>
+  <script>
+    function clickfestival() {
+      $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+    }
+
+    $(document).ready(function() {
+      setTimeout(function(){
+        if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
+          setTimeout(clickfestival, 100)
+        }
+      }, 400)
+    });
+  </script>
+  <% end %>

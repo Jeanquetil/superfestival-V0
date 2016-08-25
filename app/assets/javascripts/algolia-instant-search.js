@@ -32,7 +32,7 @@ function app(opts) {
   search.addWidget(
     instantsearch.widgets.hits({
       container: '#hits',
-      hitsPerPage: 10,
+      hitsPerPage: 20,
       templates: {
         item: getTemplate('hit'),
         empty: getTemplate('no-results')
@@ -51,7 +51,7 @@ function app(opts) {
     instantsearch.widgets.refinementList({
       container: '#festival_name',
       attributeName: 'festival_name',
-      sortBy: ['isRefined', 'name:asc', 'count:desc'],
+      sortBy: ['name:asc', 'count:desc'],
       limit: 5,
       operator: 'or',
       templates: {
@@ -64,7 +64,7 @@ function app(opts) {
     instantsearch.widgets.menu({
       container: '#concert_day',
       attributeName: 'concert_day',
-      sortBy: ['isRefined', 'name:asc', 'count:desc'],
+      sortBy: ['name:asc', 'count:desc'],
       limit: 5,
       operator: 'or',
       templates: {
