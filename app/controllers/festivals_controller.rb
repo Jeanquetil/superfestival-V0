@@ -24,7 +24,7 @@ class FestivalsController < ApplicationController
       @day_begin = @concerts.order(:start_time).first.start_time.to_time.hour
       @day_end = @concerts.order(:end_time).last.end_time.to_time.hour + 1
       @day_duration = ((@day_end - @day_begin) > 0) ? (@day_end - @day_begin) : (24 - @day_begin + @day_end)
-      @hour_in_a_day = @day_end - @day_begin - 1
+      @hour_in_a_day = ((@day_end - @day_begin) > 0) ? (@day_end - @day_begin - 1) : (23 - @day_begin + @day_end)
     end
 
     authorize @festival

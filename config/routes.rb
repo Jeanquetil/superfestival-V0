@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :festivals, only: :show
+  post "timetables/ics_export"
   resources :concerts, only: [] do
     resources :events, only: [:create, :destroy]
   end
