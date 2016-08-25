@@ -16,6 +16,7 @@ class EventPolicy < ApplicationPolicy
   private
 
   def is_user_owner_or_admin?
-    record.user == user || user.admin
+    record.timetable.user == user || user.admin
   end
+  # Ne pas oublier de faire le bon lien du record à l'user
 end
