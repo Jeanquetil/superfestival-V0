@@ -2,7 +2,7 @@ class Concert < ApplicationRecord
 
   belongs_to :festival
   belongs_to :artist
-  has_many :events
+  has_many :events, dependent: :destroy
   validates :day, presence: true
 
   include AlgoliaSearch
@@ -50,7 +50,7 @@ class Concert < ApplicationRecord
   end
 
   def concert_day
-    self.day
+    day
   end
 
   def festival_begin

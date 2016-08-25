@@ -1,5 +1,18 @@
-<div class="border card-event" style="top:<%= ((event.concert.start_time.to_time.hour + event.concert.start_time.to_time.min.to_f / 60) - @day_begin) * 50 %>px;height: <%= (event.concert.end_time - event.concert.start_time) / 72 %>px;">
 
-  <h4><%= event.concert.artist.name %> // <%= event.concert.start_time.to_time.strftime("%H:%M") %> - <%= event.concert.end_time.to_time.strftime("%H:%M") %></h4>
+<!-- <div class="border card-event btnText2 fa fa-trash"
+<h4></h4>
+<i class="fa fa-trash" style="font-size: 20px; color: white"></i>
+</div> -->
+
+
+<%= link_to concert_event_path(event.concert, event), method: :delete, data: {confirm: "Are you sure?" } do %>
+
+
+<div class="button card-event" style="top:<%= ((event.concert.start_time.to_time.hour + event.concert.start_time.to_time.min.to_f / 60) - @day_begin) * 50 %>px;height: <%= (event.concert.end_time - event.concert.start_time) / 72 %>px;">
+  <p class="btnText"><%= event.concert.artist.name %> // <%= event.concert.start_time.to_time.strftime("%H:%M") %> - <%= event.concert.end_time.to_time.strftime("%H:%M") %></p>
+  <div class="btnTwo">
+    <i class="btnText2 fa fa-trash" aria-hidden="true"></i>
+  </div>
 </div>
+<% end %>
 
