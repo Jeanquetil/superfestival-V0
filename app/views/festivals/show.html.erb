@@ -3,7 +3,7 @@
 
     <div class="row">
       <h3>List of concerts for this festival</h3>
-      <div class="col-xs-12 col-lg-8">
+      <div class="col-xs-12 col-lg-12" id="search-timetable-container">
         <header>
           <div id="search-input"></div>
         </header>
@@ -13,43 +13,6 @@
             <div id="concert_day" class="facet">
             </div>
           </div>
-          <% if params[:day] %>
-
-          <div id="right-column">
-            <div id="hits"></div>
-            <div id="pagination"></div>
-          </div>
-        </main>
-      </div>
-        <div class="col-xs-12 col-lg-4">
-          <h3>Timetable</h3>
-          <div class="timetable" style="height: <%= @day_duration * 3600 / 72 %>px">
-            <div class="card-event" style="top:0px"><%= @day_begin %>h00---------------------</div>
-              <% for i in 1..@hour_in_a_day %>
-                  <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
-                  </div>
-              <% end %>
-              <% if @timetable %>
-                <% @timetable.events.each do |event| %>
-                  <%= render "event", event: event %>
-                <% end %>
-              <% end %>
-            <div class="card-event" style="bottom:0px"><%= @day_end %>h00</div>
-          </div>
-        </div>
-
-      <span id="festival_name" class="facet hidden"></span>
-
-      <% else %>
-      <div class="col-xs-12">
-        <header>
-          <div id="search-input"></div>
-        </header>
-
-        <main>
-          <div id="left-column">
-            <div id="concert_day" class="facet"></div>
-          </div>
 
           <div id="right-column">
             <div id="hits"></div>
@@ -59,7 +22,10 @@
       </div>
 
       <span id="festival_name" class="facet hidden"></span>
-      <% end %>
+
+      <div id="timetable-container">
+
+      </div>
 
       <br>
       <br>
@@ -71,7 +37,6 @@
       <script type="text/html" id="hit-template">
         <div class="hit">
           <div class="hit-content">
-
             <a href="{{ event_url }}" data-method="post">
               {{ artist_name }} - {{ artist_genre}}
             </a>
@@ -101,17 +66,31 @@
   </div>
 </div>
 <% content_for :after_js do %>
-<script>
-  function clickfestival() {
-    $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
-  }
+  <script>
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('.ais-menu--link').on('click', function() {
+          console.log($(this))
+          var day = parseInt($(this).attr('href').slice(-1));
+          $.ajax({
+            type: 'GET',
+            url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+          })
+        })
+      }, 400)
+    })
+  </script>
+  <script>
+    function clickfestival() {
+      $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+    }
 
-  $(document).ready(function() {
-    setTimeout(function(){
-      if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
-        setTimeout(clickfestival, 100)
-      }
-    }, 400)
-  });
-</script>
+    $(document).ready(function() {
+      setTimeout(function(){
+        if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
+          setTimeout(clickfestival, 100)
+        }
+      }, 400)
+    });
+  </script>
 <% end %>
