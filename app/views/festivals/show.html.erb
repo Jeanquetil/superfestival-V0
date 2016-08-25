@@ -24,18 +24,18 @@
         </div>
         <div class="col-xs-12 col-lg-4">
         <h3>Timetable</h3>
-          <div class="timetable" style="height: <%= @day_duration / 72 %>px">
-              <div class="card-event" style="top:0px"><%= @day_begin.to_time.strftime("%H:%M") %></div>
-
-                <div class="border-top card-event" style="top:<%= @day_begin.to_i / 7200000000 %>px;height: <%= 3600 / 72 %>px;">
-                  <h4>TEST</h4>
-                </div>
-                  <% if @timetable %>
-                    <% @timetable.events.each do |event| %>
-                      <%= render "event", event: event %>
-                    <% end %>
+          <div class="timetable" style="height: <%= @day_duration * 3600 / 72 %>px">
+              <div class="card-event" style="top:0px"><%= @day_begin %>h00---------------------</div>
+                <% for i in 1..@hour_in_a_day %>
+                    <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
+                    </div>
+                <% end %>
+                <% if @timetable %>
+                  <% @timetable.events.each do |event| %>
+                    <%= render "event", event: event %>
                   <% end %>
-              <div class="card-event" style="bottom:0px"><%= @day_end.to_time.strftime("%H:%M") %></div>
+                <% end %>
+              <div class="card-event" style="bottom:0px"><%= @day_end %>h00</div>
           </div>
         </div>
 

@@ -147,7 +147,7 @@ Concert.create!(start_time: DateTime.new(2016,9,11,12,30), end_time: DateTime.ne
 Concert.create!(start_time: DateTime.new(2016,9,11,12,30), end_time: DateTime.new(2016,9,11,13,30), stage: "Alternative Stage", festival_id: 1, artist_id: 29, day: 2)
 Concert.create!(start_time: DateTime.new(2016,9,11,13,15), end_time: DateTime.new(2016,9,11,14,15), stage: "Main Stage 1", festival_id: 1, artist_id: 30, day: 2)
 Concert.create!(start_time: DateTime.new(2016,9,11,13,00), end_time: DateTime.new(2016,9,11,14,15), stage: "Perry's Stage", festival_id: 1, artist_id: 31, day: 2)
-Concert.create!(start_time: DateTime.new(2016,9,11,14,15), end_time: DateTime.new(2016,9,11,13,15), stage: "Main Stage 2", festival_id: 1, artist_id: 32, day: 2)
+Concert.create!(start_time: DateTime.new(2016,9,11,13,15), end_time: DateTime.new(2016,9,11,14,15), stage: "Main Stage 2", festival_id: 1, artist_id: 32, day: 2)
 Concert.create!(start_time: DateTime.new(2016,9,11,14,00), end_time: DateTime.new(2016,9,11,14,45), stage: "Alternative Stage", festival_id: 1, artist_id: 33, day: 2)
 Concert.create!(start_time: DateTime.new(2016,9,11,14,00), end_time: DateTime.new(2016,9,11,14,45), stage: "Kidzapalooza", festival_id: 1, artist_id: 34, day: 2)
 Concert.create!(start_time: DateTime.new(2016,9,11,14,30), end_time: DateTime.new(2016,9,11,15,45), stage: "Perry's Stage", festival_id: 1, artist_id: 35, day: 2)
