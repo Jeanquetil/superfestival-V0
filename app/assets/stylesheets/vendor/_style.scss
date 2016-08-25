@@ -75,6 +75,23 @@ header img {
 }
 
 /* HITS */
+
+.ais-hits {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  text-align: center;
+}
+
+.ais-hits--item {
+  display: inline-block;
+  width: 152px;
+  height:50px;
+  border: solid 1px;
+  margin:5px;
+}
+
 #hits {
   margin: 4px 0;
   padding: 10px 0;
@@ -83,7 +100,7 @@ header img {
 .hit {
   font-size: 0;
   padding: 8px 0;
-  border-bottom: 1px solid #eee;
+/*  border-bottom: 1px solid #eee;*/
 }
 .hit-image {
   display: inline-block;
