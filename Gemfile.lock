@@ -87,6 +87,7 @@ GEM
     hashie (3.4.4)
     httpclient (2.8.2.2)
     i18n (0.7.0)
+    icalendar (2.2.2)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
@@ -225,6 +226,7 @@ DEPENDENCIES
   devise!
   figaro
   font-awesome-sass
+  icalendar (~> 2.2.2)
   jbuilder (~> 2.0)
   jquery-rails
   listen (~> 3.0.5)

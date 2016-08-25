@@ -1,6 +1,8 @@
 class TimetablesController < ApplicationController
   before_action :set_timetable, only: [:destroy]
 
+  require 'icalendar'
+
   def create
     @timetable = Timetable.new(timetable_params)
     @timetable.user = current_user
@@ -24,12 +26,34 @@ class TimetablesController < ApplicationController
     end
   end
 
+  def ics_export
+    @events = Timetable.where(user: current_user, festival_id: params[:id])
+    respond_to do |format|
+      format.html
+      format.ics do
+        cal = Icalendar::Calendar.new
+        @events.each do |event|
+          performance = Icalendar::Event.new
+          performance.dtstart = event.concert.start_time
+          performance.dtend = event.concert.end_time
+          performance.summary = event.concert.artist.name
+          performance.location = event.concert.stage
+          cal.add_event(performance)
+        end
+        cal.publish
+        send_data('Hello, pretty world :(',
+          :type => 'text/plain', :disposition => 'attachment', :filename => 'hello.txt')
+        render :text =>  cal.to_ical
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
-  def set_timetable
-    @timetable = Timetable.find(params[:id])
-    authorize @timetable
-  end
+    def set_timetable
+      @timetable = Timetable.find(params[:id])
+      authorize @timetable
+    end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def timetable_params

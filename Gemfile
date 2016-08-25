@@ -19,6 +19,7 @@ gem 'autoprefixer-rails'
 gem 'omniauth-facebook'
 gem 'pundit'
 gem "algoliasearch-rails"
+gem 'icalendar', '~> 2.2.2'
 
 group :development, :test do
   gem 'binding_of_caller'

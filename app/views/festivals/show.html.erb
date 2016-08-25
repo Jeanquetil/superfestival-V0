@@ -51,30 +51,30 @@
   </div>
 </div>
 <% content_for :after_js do %>
-  <script>
-    $(document).ready(function() {
-      setTimeout(function() {
-        $('.ais-menu--link').on('click', function() {
-          var day = parseInt($(this).attr('href').slice(-1));
-          $.ajax({
-            type: 'GET',
-            url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
-          })
+<script>
+  $(document).ready(function() {
+    setTimeout(function() {
+      $('.ais-menu--link').on('click', function() {
+        var day = parseInt($(this).attr('href').slice(-1));
+        $.ajax({
+          type: 'GET',
+          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
         })
-      }, 1500)
-    })
-  </script>
-  <script>
-    function clickfestival() {
-      $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
-    }
+      })
+    }, 1500)
+  })
+</script>
+<script>
+  function clickfestival() {
+    $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+  }
 
-    $(document).ready(function() {
-      setTimeout(function(){
-        if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
-          setTimeout(clickfestival, 100)
-        }
-      }, 400)
-    });
-  </script>
+  $(document).ready(function() {
+    setTimeout(function(){
+      if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
+        setTimeout(clickfestival, 100)
+      }
+    }, 400)
+  });
+</script>
 <% end %>
