@@ -12,4 +12,9 @@ class FestivalPolicy < ApplicationPolicy
   def index?
     true
   end
+
+  def display_timetable?
+    true
+  end
+
 end
