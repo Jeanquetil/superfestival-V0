@@ -3,7 +3,7 @@
 
     <div class="row">
       <h3>List of concerts for this festival</h3>
-      <div class="col-xs-12 col-lg-12" id="search-timetable-container">
+      <div class="col-xs-12 col-lg-8" id="search-timetable-container">
         <header>
           <div id="search-input"></div>
         </header>
@@ -21,7 +21,8 @@
         </main>
       </div>
 
-      <div id="timetable-container">
+      <div id="timetable-container" class="col-lg-4">
+        <%= render "timetable", { timetable: @timetable, day_begin: @day_begin, day_end: @day_end, day_duration: @day_duration, hour_in_a_day: @hour_in_a_day } %>
       </div>
       <!-- /INTERFACE -->
 
@@ -51,30 +52,29 @@
   </div>
 </div>
 <% content_for :after_js do %>
-<script>
-  $(document).ready(function() {
-    setTimeout(function() {
-      $('.ais-menu--link').on('click', function() {
-        var day = parseInt($(this).attr('href').slice(-1));
-        $.ajax({
-          type: 'GET',
-          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
-        })
-      })
-    }, 1500)
-  })
-</script>
-<script>
-  function clickfestival() {
-    $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
-  }
-
-  $(document).ready(function() {
-    setTimeout(function(){
-      if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
-        setTimeout(clickfestival, 100)
+    <script>
+      function clickfestival() {
+        $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
       }
-    }, 400)
-  });
-</script>
+    $(document).ready(function() {
+      setTimeout(function(){
+        if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
+          setTimeout(clickfestival, 100)
+        }
+      }, 400)
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
+      setTimeout(function() {
+        $('.ais-menu--link').click(function() {
+          var day = parseInt($(this).attr('href').slice(-1));
+            $.ajax({
+              type: 'GET',
+              url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+            });
+          });
+        }, 1000)
+      })
+    </script>
 <% end %>
