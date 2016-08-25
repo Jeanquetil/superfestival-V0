@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823085011) do
+ActiveRecord::Schema.define(version: 20160825090937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160823085011) do
     t.integer  "artist_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "day"
     t.index ["artist_id"], name: "index_concerts_on_artist_id", using: :btree
     t.index ["festival_id"], name: "index_concerts_on_festival_id", using: :btree
   end

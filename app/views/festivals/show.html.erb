@@ -14,7 +14,7 @@
               <div id="concert_day" class="facet"></div>
             </div>
 
-    <%# if params[:date] %>
+    <% if params[:day] %>
 
             <div id="right-column">
               <div id="hits"></div>
@@ -30,17 +30,16 @@
                 <div class="border-top card-event" style="top:<%= @day_begin.to_i / 7200000000 %>px;height: <%= 3600 / 72 %>px;">
                   <h4>TEST</h4>
                 </div>
-
-              <% if @timetable %>
-                <% @timetable.events.each do |event| %>
-                  <%= render "event", event: event %>
-                <% end %>
-              <% end %>
+                  <% if @timetable %>
+                    <% @timetable.events.each do |event| %>
+                      <%= render "event", event: event %>
+                    <% end %>
+                  <% end %>
               <div class="card-event" style="bottom:0px"><%= @day_end.to_time.strftime("%H:%M") %></div>
           </div>
         </div>
 
-<!--     <%# else %>
+      <% else %>
       <div class="col-xs-12">
         <header>
           <div id="search-input"></div>
@@ -58,7 +57,7 @@
           </div>
         </main>
       </div>
-    <%# end %> -->
+    <% end %>
 
       <br>
       <br>
