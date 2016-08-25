@@ -1,4 +1,4 @@
-<div class="border card-event" style="top:<%= ((event.concert.start_time.to_time.hour + event.concert.start_time.to_time.min.to_f / 60) - @day_begin) * 50 %>px;height: <%= (event.concert.end_time - event.concert.start_time) / 72 %>px;">
+<div class="margin-tb-10 text-center card-event concert" style="top:<%= ((event.concert.start_time.to_time.hour + event.concert.start_time.to_time.min.to_f / 60) - @day_begin) * 50 + 2 %>px;height: <%= (event.concert.end_time - event.concert.start_time) / 72 - 2 %>px;">
 
   <h4><%= event.concert.artist.name %> // <%= event.concert.start_time.to_time.strftime("%H:%M") %> - <%= event.concert.end_time.to_time.strftime("%H:%M") %></h4>
 </div>

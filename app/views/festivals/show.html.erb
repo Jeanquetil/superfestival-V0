@@ -21,21 +21,21 @@
           </div>
         </main>
       </div>
+
       <div class="col-xs-12 col-lg-4">
-        <h3>Timetable</h3>
+        <h3 class="timetable-title">Timetable</h3>
         <div class="timetable" style="height: <%= @day_duration * 3600 / 72 %>px">
-          <div class="card-event" style="top:0px"><%= @day_begin %>h00---------------------</div>
-          <% for i in 1..@hour_in_a_day %>
-          <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
-          </div>
-          <% end %>
-          <% if @timetable %>
-          <% @timetable.events.each do |event| %>
-          <%= render "event", event: event %>
-          <% end %>
-          <% end %>
-          <div class="card-event" style="bottom:0px"><%= @day_end %>h00</div>
-        </div>
+          <div class="time card-event" style="top:0px">Début : <%= @day_begin %>h00</div>
+            <% for i in 1..@hour_in_a_day %>
+                <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
+                </div>
+            <% end %>
+            <% if @timetable %>
+              <% @timetable.events.each do |event| %>
+                <%= render "event", event: event %>
+              <% end %>
+            <% end %>
+          <div class="time card-event" style="bottom:0px">Fin : <%= @day_end %>h00</div>
       </div>
 
       <% else %>
