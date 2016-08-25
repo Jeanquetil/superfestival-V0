@@ -10,8 +10,8 @@
 
         <main>
           <div id="left-column">
-            <div id="concert_day" class="facet">
-            </div>
+            <div id="concert_day" class="facet"></div>
+            <span id="festival_name" class="facet hidden"></span>
           </div>
           <% if params[:day] %>
 
@@ -22,24 +22,21 @@
         </main>
       </div>
 
-        <div class="col-xs-12 col-lg-4">
-          <h3 class="timetable-title">Timetable</h3>
-          <div class="timetable" style="height: <%= @day_duration * 3600 / 72 %>px">
-            <div class="time card-event" style="top:0px">Début : <%= @day_begin %>h00</div>
-              <% for i in 1..@hour_in_a_day %>
-                  <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
-                  </div>
+      <div class="col-xs-12 col-lg-4">
+        <h3 class="timetable-title">Timetable</h3>
+        <div class="timetable" style="height: <%= @day_duration * 3600 / 72 %>px">
+          <div class="time card-event" style="top:0px">Début : <%= @day_begin %>h00</div>
+            <% for i in 1..@hour_in_a_day %>
+                <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
+                </div>
+            <% end %>
+            <% if @timetable %>
+              <% @timetable.events.each do |event| %>
+                <%= render "event", event: event %>
               <% end %>
-              <% if @timetable %>
-                <% @timetable.events.each do |event| %>
-                  <%= render "event", event: event %>
-                <% end %>
-              <% end %>
-            <div class="time card-event" style="bottom:0px">Fin : <%= @day_end %>h00</div>
-          </div>
-        </div>
-
-      <span id="festival_name" class="facet hidden"></span>
+            <% end %>
+          <div class="time card-event" style="bottom:0px">Fin : <%= @day_end %>h00</div>
+      </div>
 
       <% else %>
       <div class="col-xs-12">
@@ -50,6 +47,7 @@
         <main>
           <div id="left-column">
             <div id="concert_day" class="facet"></div>
+            <span id="festival_name" class="facet hidden"></span>
           </div>
 
           <div id="right-column">
@@ -59,7 +57,6 @@
         </main>
       </div>
 
-      <span id="festival_name" class="facet hidden"></span>
       <% end %>
 
       <br>
@@ -72,20 +69,12 @@
       <script type="text/html" id="hit-template">
         <div class="hit">
           <div class="hit-content">
-
             <a href="{{ event_url }}" data-method="post">
               {{ artist_name }} - {{ artist_genre}}
             </a>
           </div>
         </div>
       </script>
-
-      <script type="text/html" id="no-results-template">
-        <div id="no-results-message">
-          <p>We didn't find any results for the search <em>"{{query}}"</em>.</p>
-        </div>
-      </script>
-      <!-- /TEMPLATES -->
 
       <script type="text/html" id="no-results-template">
         <div id="no-results-message">
