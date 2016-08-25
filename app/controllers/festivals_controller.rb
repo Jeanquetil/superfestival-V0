@@ -4,6 +4,9 @@ class FestivalsController < ApplicationController
 
   def show
     @festival = Festival.find(params[:id])
+    @day_begin = @festival.concerts.order(:start_time).first.start_time
+    @day_end = @festival.concerts.order(:end_time).last.end_time
+    @day_duration = @day_end - @day_begin
 
     if params[:day]
     # @concerts = @festival.concerts.of_the_day(params[:date].to_datetime + 6.hours)
