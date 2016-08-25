@@ -11,7 +11,6 @@
 
       <main>
         <div id="left-column">
-          <div id="festival_name" class="facet"></div>
           <div id="concert_day" class="facet"></div>
         </div>
 
@@ -20,6 +19,8 @@
           <div id="pagination"></div>
         </div>
       </main>
+
+      <div id="festival_name" class="facet hidden"></div>
 
       <!-- /INTERFACE -->
 
@@ -50,7 +51,24 @@
       <!-- /TEMPLATES -->
 
       <!-- SCRIPTS -->
+
       <script src="//cdn.jsdelivr.net/instantsearch.js/1/instantsearch.min.js"></script>
+
     </div>
   </div>
 </div>
+<% content_for :after_js do %>
+<script>
+  function clickfestival() {
+    $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+  }
+
+  $(document).ready(function() {
+    setTimeout(function(){
+      if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
+        setTimeout(clickfestival, 100)
+      }
+    }, 400)
+  });
+</script>
+<% end %>
