@@ -13,6 +13,8 @@ class EventsController < ApplicationController
     timetable = current_user.find_or_create_timetable_for!(@event.concert.festival, params[:day])
     authorize @event
     @event.timetable = timetable
+    @day_begin = timetable.festival.concerts.where(day: timetable.day).order(:start_time).first.start_time.to_time.hour
+    @day_end =timetable.festival.concerts.where(day: timetable.day).order(:end_time).last.end_time.to_time.hour + 1
     validation = []
     timetable.events.each do |event|
       if (event.concert.start_time < @event.concert.end_time && event.concert.end_time > @event.concert.start_time)
