@@ -9,18 +9,49 @@
     </div>
   </div>
 </div>
-<div class="navbar-height" id="festivals"></div>
-<div class="wrapper">
-  <div class="container">
-    <div class="row">
-      <h2 class="text-center">festivals</h2>
-      <hr>
-      <% @festivals.each do |r| %>
-      <%= render "festival", festival: r %>
-      <% end %>
+
+<div class="padding-topbot-85" id="concept">
+    <div class="container">
+      <div class="row">
+        <h2 class="text-center iceberg-shadow">concept</h2>
+        <hr>
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+          <img src="https://jeanquetil.github.io/airbnb-static/images/beer.png" />
+          <h3>Drinkable</h3>
+          <p>Brand new fresh beer.</p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+        <img src="https://jeanquetil.github.io/airbnb-static/images/dollar.png" />
+          <h3>Bankable</h3>
+          <p>No cash issue anymore.</p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+        <img src="https://jeanquetil.github.io/airbnb-static/images/globe.png" />
+          <h3>For travelers</h3>
+          <p>The earth is your new home.</p>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
+        <img src="https://jeanquetil.github.io/airbnb-static/images/heart.png" />
+          <h3>Passion</h3>
+          <p>Join a community you will love.</p>
+        </div>
+      </div>
     </div>
-  </div>
 </div>
+
+<div class="wrapper-blue padding-topbot-85" id="festivals">
+    <div class="container">
+      <div class="row">
+        <h2 class="text-center pink-shadow">festivals</h2>
+        <hr>
+        <% @festivals.each do |r| %>
+        <%= render "festival", festival: r %>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
@@ -41,7 +72,7 @@
       });
       $('#scroll').click(function() {
         $('html, body').animate({
-          scrollTop: $("#festivals").offset().top
+          scrollTop: $("#concept").offset().top
         }, 1500);
       });
     });
