@@ -22,7 +22,7 @@
       </div>
 
       <div id="timetable-container" class="col-lg-4">
-        <%= render "timetable", { timetable: @timetable, day_begin: @day_begin, day_end: @day_end, day_duration: @day_duration, hour_in_a_day: @hour_in_a_day } %>
+        <h3>Your future timetable ...</h3>
       </div>
       <!-- /INTERFACE -->
 
@@ -66,15 +66,25 @@
   </script>
   <script>
     $(document).ready(function() {
+
       setTimeout(function() {
-        $('.ais-menu--link').click(function() {
-          var day = parseInt($(this).attr('href').slice(-1));
+          $('.ais-menu--list').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
+            var day = parseInt($(this).text().slice(0,1));
+              $.ajax({
+                type: 'GET',
+                url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+              });
+          });
+          if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
+            var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
+            console.log(day);
             $.ajax({
               type: 'GET',
               url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
             });
-          });
+          }
         }, 1000)
       })
+
     </script>
 <% end %>
