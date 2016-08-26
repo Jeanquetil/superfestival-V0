@@ -10,7 +10,7 @@ class Concert < ApplicationRecord
   algoliasearch do
     attributesToIndex ['stage', 'artist_name', 'artist_genre', 'start_time', 'festival_name']
 
-    customRanking ['asc(artist_id)']
+    customRanking ['asc(start_time)']
 
     add_attribute :artist_name do
       artist_name
