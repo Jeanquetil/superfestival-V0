@@ -245,20 +245,6 @@ header img {
   margin-bottom: 3px;
 }
 
-.ais-menu {
-  color: $pink;
-  border: solid 2px $pink;
-  padding: 7px 25px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  margin: 0 15px;
-  transition: all 0.3s ease;
-  &:hover {
-    color:white;
-    background-color: $pink;
-  }
-}
-
 .ais-refinement-list--label,
 .ais-menu--link {
   font-size: 13px;
