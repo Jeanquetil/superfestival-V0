@@ -68,13 +68,13 @@
     $(document).ready(function() {
       setTimeout(function() {
         $('.ais-menu--link').click(function() {
-          var day = parseInt($(this).attr('href').slice(-1));
+          var day = parseInt($(this).text().slice(0,1));
             $.ajax({
               type: 'GET',
               url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
             });
           });
-        }, 1000)
+        }, 1500)
       })
     </script>
 <% end %>

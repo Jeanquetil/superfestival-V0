@@ -7,9 +7,9 @@
     </div>
     <% end %>
     <% if timetable %>
-    <% timetable.events.each do |event| %>
-    <%= render "event", event: event %>
-    <% end %>
+      <% timetable.events.each do |event| %>
+        <%= render "event", event: event %>
+      <% end %>
     <% end %>
     <div class="time card-event" style="bottom:0px">Fin : <%= day_end %>h00</div>
 
