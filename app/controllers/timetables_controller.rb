@@ -28,7 +28,6 @@ class TimetablesController < ApplicationController
 
   def ics_export
     @timetables = Timetable.where(user: current_user, festival_id: params[:festival])
-    # , festival_id: params[:id]
     authorize @timetables
     respond_to do |format|
       format.html
