@@ -27,33 +27,37 @@ class TimetablesController < ApplicationController
   end
 
   def ics_export
-    @events = Timetable.where(user: current_user, festival_id: params[:id])
+    @timetables = Timetable.where(user: current_user, festival_id: params[:festival])
+    # , festival_id: params[:id]
+    authorize @timetables
     respond_to do |format|
       format.html
       format.ics do
         cal = Icalendar::Calendar.new
-        @events.each do |event|
-          performance = Icalendar::Event.new
-          performance.dtstart = event.concert.start_time
-          performance.dtend = event.concert.end_time
-          performance.summary = event.concert.artist.name
-          performance.location = event.concert.stage
-          cal.add_event(performance)
+        filename = "Your festival calendar"
+        @timetables.each do |timetable|
+          timetable.events.each do |event|
+            performance = Icalendar::Event.new
+            performance.dtstart = event.concert.start_time
+            performance.dtend = event.concert.end_time
+            performance.summary = "#{event.timetable.festival.name} : #{event.concert.artist.name}"
+            performance.location = event.concert.stage
+            cal.add_event(performance)
+          end
         end
         cal.publish
-        send_data('Hello, pretty world :(',
-          :type => 'text/plain', :disposition => 'attachment', :filename => 'hello.txt')
         render :text =>  cal.to_ical
+        # send_data cal.to_ical, type: 'text/calendar', disposition: 'attachment', filename: filename
       end
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_timetable
-      @timetable = Timetable.find(params[:id])
-      authorize @timetable
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_timetable
+    @timetable = Timetable.find(params[:id])
+    authorize @timetable
+  end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def timetable_params
