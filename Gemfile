@@ -20,6 +20,7 @@ gem 'omniauth-facebook'
 gem 'pundit'
 gem "algoliasearch-rails"
 gem 'icalendar', '~> 2.2.2'
+gem 'rspotify'
 
 group :development, :test do
   gem 'binding_of_caller'
