@@ -9,10 +9,6 @@ class TimetablePolicy < ApplicationPolicy
     true # tout le monde peut créer un timetable
   end
 
-  def ics_export?
-    true
-  end
-
   def destroy?
     is_user_owner_or_admin?
   end
