@@ -8,6 +8,8 @@
 Concert.destroy_all
 Artist.destroy_all
 Festival.destroy_all
+Event.destroy_all
+Timetable.destroy_all
 
 Festival.create!(name: "Lollapaloozade", start_date: Date.new(2016,9,10) , end_date: Date.new(2016,9,11) , location: "Berlin", photo: "http://lolp3.de.c3cdn.com/wp/wp-content/uploads/2014/11/LOL2014-DE-footer_v2.png")
 Festival.create!(name: "Fête de l'Huma", start_date: Date.new(2016,9,9) , end_date: Date.new(2016,9,11) , location: "La Courneuve", photo: "http://adecr44.fr/sites/default/files/fichiers/www/images/Fete-de-lhuma-bandeau-960x450.png")
