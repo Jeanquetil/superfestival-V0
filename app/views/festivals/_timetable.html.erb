@@ -1,18 +1,17 @@
-
-  <h3 class="timetable-title">Timetable</h3>
-  <div class="timetable" id="timetable" style="height: <%= day_duration * 3600 / 72 %>px">
-    <div class="time card-event" style="top:0px">Début : <%= day_begin %>h00</div>
-    <% for i in 1..hour_in_a_day %>
-    <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
-    </div>
-    <% end %>
-    <% if timetable %>
-      <% timetable.events.each do |event| %>
-        <%= render "event", event: event %>
-      <% end %>
-    <% end %>
-    <div class="time card-event" style="bottom:0px">Fin : <%= day_end %>h00</div>
-
+<h3 class="timetable-title">Timetable</h3>
+<div class="timetable" id="timetable" style="height: <%= day_duration * 3600 / 72 %>px">
+  <div class="time card-event" style="top:0px">Début : <%= day_begin %>h00</div>
+  <% for i in 1..hour_in_a_day %>
+  <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
   </div>
+  <% end %>
+  <% if timetable %>
+  <% timetable.events.each do |event| %>
+  <%= render "event", event: event %>
+  <% end %>
+  <% end %>
+  <div class="time card-event" style="bottom:0px">Fin : <%= day_end %>h00</div>
+</div>
+<%= link_to 'download', timetables_url(festival: params[:id]) %>
 
-  <%#= link_to "download", timetables_ics_export_url %>
+

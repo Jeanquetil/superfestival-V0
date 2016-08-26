@@ -1,7 +1,7 @@
 <div class="navbar-wagon navbar-fixed-top">
   <!-- Logo -->
   <%= link_to root_path, class: "navbar-wagon-brand tohide" do %>
-    <%= image_tag "logo.png" %>
+  <%= image_tag "logo.png" %>
   <% end %>
 
   <!-- Right Navigation -->
@@ -10,49 +10,54 @@
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
 
-      <!-- Profile picture and dropdown -->
-      <div class="navbar-wagon-item">
-        <div class="dropdown">
+    <!-- Profile picture and dropdown -->
+    <div class="navbar-wagon-item">
+      <div class="dropdown">
         <% if current_user.facebook_picture_url %>
-          <%= image_tag current_user.facebook_picture_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+        <%= image_tag current_user.facebook_picture_url, class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
         <% else %>
-          <%= image_tag "http://placehold.it/30x30", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
-          <% end %>
-          <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to "#" do %>
-                <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
-              <% end %>
-            </li>
-            <li>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
-              <% end %>
-            </li>
-          </ul>
-        </div>
+        <%= image_tag "http://placehold.it/30x30", class: "avatar dropdown-toggle", id: "navbar-wagon-menu", "data-toggle" => "dropdown" %>
+        <% end %>
+        <ul class="dropdown-menu dropdown-menu-right navbar-wagon-dropdown-menu">
+          <li>
+            <%= link_to "#" do %>
+            <i class="fa fa-user"></i> <%= t(".profile", default: "Profile") %>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to "#" do %>
+            <i class="fa fa-home"></i>  <%= t(".profile", default: "Home") %>
+            <% end %>
+          </li>
+<!--           <li>
+            <%#= link_to timetables_url do %>
+            <i class="fa fa-download"></i>  <%#= t(".profile", default: "Download my timetables") %>
+            <%# end %>
+          </li> -->
+          <li>
+            <%= link_to destroy_user_session_path, method: :delete do %>
+            <i class="fa fa-sign-out"></i>  <%= t(".sign_out", default: "Log out") %>
+            <% end %>
+          </li>
+        </ul>
       </div>
+    </div>
 
     <% else %>
     <%= link_to "#", class: "btn-std tohide" do %>
-      <%= t("Concept") %>
+    <%= t("Concept") %>
     <% end %>
     <%= link_to "#", class: "btn-std tohide" do %>
-      <%= t("Les festivals") %>
+    <%= t("Les festivals") %>
     <% end %>
-      <!-- Login text link -->
-      <% if user_signed_in? && current_user.facebook_picture_url %>
-        <%= image_tag current_user.facebook_picture_url, height: 50, width: 50 %>
-      <% else %>
-        <%= link_to user_facebook_omniauth_authorize_path, class: "btn-std" do %>
-          <%= t(".sign_in", default: "login with ") %><i class="fa fa-facebook" aria-hidden="true"></i>
-        <% end %>
-      <% end %>
+    <!-- Login text link -->
+    <% if user_signed_in? && current_user.facebook_picture_url %>
+    <%= image_tag current_user.facebook_picture_url, height: 50, width: 50 %>
+    <% else %>
+    <%= link_to user_facebook_omniauth_authorize_path, class: "btn-std" do %>
+    <%= t(".sign_in", default: "login with ") %><i class="fa fa-facebook" aria-hidden="true"></i>
+    <% end %>
+    <% end %>
     <% end %>
   </div>
 
