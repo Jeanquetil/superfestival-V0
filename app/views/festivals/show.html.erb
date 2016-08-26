@@ -52,10 +52,10 @@
   </div>
 </div>
 <% content_for :after_js do %>
-    <script>
-      function clickfestival() {
-        $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
-      }
+  <script>
+    function clickfestival() {
+      $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+    }
     $(document).ready(function() {
       setTimeout(function(){
         if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
@@ -68,13 +68,13 @@
     $(document).ready(function() {
       setTimeout(function() {
         $('.ais-menu--link').click(function() {
-          var day = parseInt($(this).text().slice(0,1));
-            $.ajax({
-              type: 'GET',
-              url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
-            });
+          var day = parseInt($(this).attr('href').slice(-1));
+          $.ajax({
+            type: 'GET',
+            url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
           });
-        }, 1500)
-      })
-    </script>
+        });
+      }, 1000)
+    })
+  </script>
 <% end %>
