@@ -13,6 +13,10 @@ class TimetablePolicy < ApplicationPolicy
     is_user_owner_or_admin?
   end
 
+  def ics_export?
+    true
+  end
+
   private
 
   def is_user_owner_or_admin?
