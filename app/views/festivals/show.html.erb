@@ -52,10 +52,10 @@
   </div>
 </div>
 <% content_for :after_js do %>
-    <script>
-      function clickfestival() {
-        $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
-      }
+  <script>
+    function clickfestival() {
+      $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+    }
     $(document).ready(function() {
       setTimeout(function(){
         if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
