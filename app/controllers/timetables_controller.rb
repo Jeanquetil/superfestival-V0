@@ -6,7 +6,6 @@ class TimetablesController < ApplicationController
   def create
     @timetable = Timetable.new(timetable_params)
     @timetable.user = current_user
-    authorize @timetable
     respond_to do |format|
       if @timetable.save
         format.html { redirect_to @timetable, notice: 'Timetable was successfully created.' }
@@ -28,7 +27,6 @@ class TimetablesController < ApplicationController
 
   def ics_export
     @timetables = Timetable.where(user: current_user, festival_id: params[:festival])
-    authorize @timetables
     respond_to do |format|
       format.html
       format.ics do
@@ -55,7 +53,6 @@ class TimetablesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_timetable
       @timetable = Timetable.find(params[:id])
-      authorize @timetable
     end
 
   # Never trust parameters from the scary internet, only allow the white list through.
