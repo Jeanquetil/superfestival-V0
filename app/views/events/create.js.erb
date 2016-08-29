@@ -2,11 +2,11 @@ var events = $('<% @events.each do |event| %><%= j render "festivals/event", eve
 $('#timetable').html('');
 $('#timetable').append(events);
 
+var impossibleIds = <%= @impossible_concerts %>;
 $('.hit').each(function() {
   var id = parseInt($(this).attr('id'));
-  var impossibleIds = <%= @impossible_concerts %>;
   var that = $(this);
   if(impossibleIds.includes(id)) {
-    that.removeClass('possible').addClass('impossible');
+    that.parent().addClass('impossible');
   }
 });

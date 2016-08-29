@@ -35,14 +35,14 @@
 
         <!-- TEMPLATES -->
         <script type="text/html" id="hit-template">
-          <div class="hit possible" id="{{ id }}">
-            <div class="hit-content" value="{{id}}">
+          <div class="hit" id="{{ id }}">
+            <div class="hit-content">
               <% if user_signed_in? %>
                 <a href="{{ event_url }}" data-method="post" data-remote="true">
-                  {{ artist_name }} - {{ artist_genre}}
+                  {{ artist_name }} - {{ artist_genre}} - {{ start_time }}
                 </a>
               <% else %>
-                  {{ artist_name }} - {{ artist_genre}}
+                  {{ artist_name }} - {{ artist_genre}} - {{ start_time }}
               <% end %>
             </div>
             {{#best_song}}

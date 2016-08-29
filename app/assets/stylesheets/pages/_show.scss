@@ -27,3 +27,11 @@
 
 .play{background: url('http://www.alexkatz.me/codepen/images/play.png') ;}
 .pause{background: url('http://www.alexkatz.me/codepen/images/pause.png') ;}
+
+.impossible {
+  background-color: #E5E5E5;
+  opacity: 0.1;
+}
+.impossible a {
+  cursor: default;
+}
