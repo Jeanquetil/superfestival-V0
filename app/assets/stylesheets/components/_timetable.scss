@@ -1,5 +1,5 @@
 .timetable {
-  background-color: #32b796;
+  background-color: $iceberg;
   position:relative;
 }
 
@@ -14,6 +14,10 @@
   display:flex;
   justify-content: space-around;
   align-items: center;
+}
+
+#timetable .fa-times {
+  color: $pink!important;
 }
 
 .timetable .concert {

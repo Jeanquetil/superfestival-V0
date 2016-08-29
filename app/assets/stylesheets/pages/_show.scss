@@ -9,21 +9,16 @@
   margin-bottom: 30px;
 }
 
-#audioplayer{
-  width: 60px;
-  height: 60px;
-}
-
 #pButton{
-    height:60px;
-    width: 60px;
-    border: none;
-    background-size: 50% 50%;
-    background-repeat: no-repeat;
-    background-position: center;
-    float:left;
-    outline:none;
+  font-family: FontAwesome;
+  display: inline-block;
+  cursor:pointer;
 }
 
-.play{background: url('http://www.alexkatz.me/codepen/images/play.png') ;}
-.pause{background: url('http://www.alexkatz.me/codepen/images/pause.png') ;}
+.play:before{
+  content: "\f04b";
+
+}
+.pause:before{
+  content: "\f04c";
+}
