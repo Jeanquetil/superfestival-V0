@@ -41,6 +41,10 @@ class Concert < ApplicationRecord
     add_attribute :best_song do
       best_song
     end
+
+    add_attribute :concert_id do
+      concert_id
+    end
   end
 
   def artist_name
@@ -74,6 +78,10 @@ class Concert < ApplicationRecord
       RSpotify::Artist.search(artist.name).first.top_tracks(:FR).first.preview_url
       end
     end
+  end
+
+  def concert_id
+    self.id
   end
 
 end

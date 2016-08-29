@@ -35,17 +35,17 @@
 
         <!-- TEMPLATES -->
         <script type="text/html" id="hit-template">
-          <div class="hit">
-            <div class="hit-content" value="{{id}}">
+          <div class="hit possible" id="{{ id }}">
+            <div class="hit-content" value="{{ id }}">
               <a href="{{ event_url }}" data-method="post" data-remote="true">
-                {{ artist_name }} - {{ artist_genre}}
+                {{ artist_name }} - {{ artist_genre }}
               </a>
             </div>
-              <audio controls class="clip">
-                <source src="{{best_song}}"
-                     type='audio/mp3'>
-                <p>Your user agent does not support this streaming feature</p>
-              </audio>
+            <audio controls class="clip">
+              <source src="{{ best_song }}"
+                   type='audio/mp3'>
+              <p>Your user agent does not support this streaming feature</p>
+            </audio>
           </div>
         </script>
 
@@ -64,38 +64,39 @@
 </div>
 
 <% content_for :after_js do %>
-<script>
-  function clickfestival() {
-    $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
-  }
-  $(document).ready(function() {
-    setTimeout(function(){
-      if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
-        setTimeout(clickfestival, 100)
-      }
-    }, 400)
-  });
-</script>
-<script>
-  $(document).ready(function() {
+  <script>
+    function clickfestival() {
+      $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+    }
+    $(document).ready(function() {
+      setTimeout(function(){
+        if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
+          setTimeout(clickfestival, 100)
+        }
+      }, 400)
+    });
+  </script>
+  <script>
+    $(document).ready(function() {
 
-    setTimeout(function() {
-      $('.ais-menu--list').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
-        var day = parseInt($(this).text().slice(0,1));
-        $.ajax({
-          type: 'GET',
-          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+      setTimeout(function() {
+        $('.ais-menu--list').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
+          var day = parseInt($(this).text().slice(0,1));
+          $.ajax({
+            type: 'GET',
+            url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+          });
         });
-      });
-      if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
-        var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
-        $.ajax({
-          type: 'GET',
-          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
-        });
-      }
-    }, 1000);
-  });
+        if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
+          var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
+          $.ajax({
+            type: 'GET',
+            url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+          });
+        }
+      }, 1000);
+    });
 
-</script>
+  </script>
+
 <% end %>
