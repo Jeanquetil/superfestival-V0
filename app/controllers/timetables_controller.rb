@@ -49,6 +49,32 @@ class TimetablesController < ApplicationController
     end
   end
 
+  def get_playlist
+    @festival = Festival.find(params[:festival])
+    @timetables = Timetable.where(user: current_user, festival_id: params[:festival])
+    # .where(user: current_user, festival_id: params[:festival])
+    spotify_user = RSpotify::User.new(current_user.hash_spotify)
+    playlist = spotify_user.create_playlist!("Ma playlist pour #{@festival.name}")
+    tracks = []
+    @timetables.each do |timetable|
+      timetable.events.each do |event|
+        track = RSpotify::Artist.search(event.concert.artist.name).first.top_tracks(:FR).first
+        tracks << track
+      end
+    end
+    playlist.add_tracks!(tracks)
+    redirect_to festival_path(@festival)
+
+
+
+    # spotify_user.create = RSpotify::User.new(token_spotify:)
+    # spotify_user.whatever
+    # redirect
+    # spotify.html.erb
+
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_timetable
