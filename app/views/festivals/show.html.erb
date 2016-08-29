@@ -36,11 +36,16 @@
         <!-- TEMPLATES -->
         <script type="text/html" id="hit-template">
           <div class="hit">
-            <div class="hit-content">
+            <div class="hit-content" value="{{id}}">
               <a href="{{ event_url }}" data-method="post" data-remote="true">
                 {{ artist_name }} - {{ artist_genre}}
               </a>
             </div>
+              <audio controls class="clip">
+                <source src="{{best_song}}"
+                     type='audio/mp3'>
+                <p>Your user agent does not support this streaming feature</p>
+              </audio>
           </div>
         </script>
 
@@ -72,6 +77,14 @@
   });
 </script>
 <script>
+  // $(".hit-content").mouseover(function() {
+
+  //   console.log("test")
+  //   // var value = ($(this).val()) - 1;
+  //   $(".clip")[13].play();
+  //   });
+</script>
+<script>
   $(document).ready(function() {
 
     setTimeout(function() {
@@ -84,14 +97,13 @@
       });
       if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
         var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
-        console.log(day);
         $.ajax({
           type: 'GET',
           url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
         });
       }
-    }, 1000)
-  })
+    }, 1000);
+  });
 
 </script>
 <% end %>
