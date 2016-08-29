@@ -7,7 +7,6 @@ $('.hit').each(function() {
   var impossibleIds = <%= @impossible_concerts %>;
   var that = $(this);
   if(impossibleIds.includes(id)) {
-    console.log(id);
     that.removeClass('possible').addClass('impossible');
   }
 });
