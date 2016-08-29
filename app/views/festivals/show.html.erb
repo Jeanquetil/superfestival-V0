@@ -29,17 +29,21 @@
           </main>
         </div>
         <div id="timetable-container" class="col-lg-4">
-          <h3>Your future timetable ...</h3>
+          <%= render "timetable"%>
         </div>
         <!-- /INTERFACE -->
 
         <!-- TEMPLATES -->
         <script type="text/html" id="hit-template">
           <div class="hit possible" id="{{ id }}">
-            <div class="hit-content" value="{{ id }}">
-              <a href="{{ event_url }}" data-method="post" data-remote="true">
-                {{ artist_name }} - {{ artist_genre }}
-              </a>
+            <div class="hit-content" value="{{id}}">
+              <% if user_signed_in? %>
+                <a href="{{ event_url }}" data-method="post" data-remote="true">
+                  {{ artist_name }} - {{ artist_genre}}
+                </a>
+              <% else %>
+                  {{ artist_name }} - {{ artist_genre}}
+              <% end %>
             </div>
             <audio controls class="clip">
               <source src="{{ best_song }}"
@@ -64,39 +68,45 @@
 </div>
 
 <% content_for :after_js do %>
-  <script>
-    function clickfestival() {
-      $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
-    }
-    $(document).ready(function() {
-      setTimeout(function(){
-        if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
-          setTimeout(clickfestival, 100)
-        }
-      }, 400)
-    });
-  </script>
-  <script>
-    $(document).ready(function() {
+<script>
+  function clickfestival() {
+    $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+    $('a.ais-menu--link:contains("1")').parent().parent().click()
 
-      setTimeout(function() {
-        $('.ais-menu--list').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
-          var day = parseInt($(this).text().slice(0,1));
-          $.ajax({
-            type: 'GET',
-            url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
-          });
+  }
+  $(document).ready(function() {
+    setTimeout(function(){
+      if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
+        setTimeout(clickfestival, 100)
+      }
+    }, 400)
+  });
+</script>
+<script>
+window.onload = function() {
+  $.ajax({
+    type: 'GET',
+    url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + 1
+  });
+
+  setTimeout(function() {
+    $("div").on('click', ".ais-menu--link", function() {
+      var day = parseInt($(this).text().slice(0,1));
+      $.ajax({
+        type: 'GET',
+        url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+      });
+
+      if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
+        var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
+        $.ajax({
+          type: 'GET',
+          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
         });
-        if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
-          var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
-          $.ajax({
-            type: 'GET',
-            url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
-          });
-        }
-      }, 1000);
-    });
-
-  </script>
+      }
+    }, 1000);
+  });
+}
+</script>
 
 <% end %>
