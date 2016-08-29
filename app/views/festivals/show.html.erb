@@ -1,3 +1,7 @@
+<% content_for :meta_title, "#{@festival.name}" %>
+<% content_for :meta_description, "Faites votre propre timetable pour #{@festival.name} grâce à Super Festival" %>
+<% content_for :image_url, @festival.photo %>
+
  <div class="wrapper">
    <div class="container">
 
@@ -28,6 +32,7 @@
             </div>
           </main>
         </div>
+
         <div id="timetable-container" class="col-lg-4">
           <%= render "timetable"%>
         </div>
@@ -50,7 +55,6 @@
                 <a id="pButton" class="play" data-button_id="{{id}}"></a>
               {{/best_song}}
             </div>
-
           </div>
         </script>
 
@@ -103,6 +107,9 @@
 
     if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
       var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
+
+      // afficher le jour près de du titre "Timetable"
+
       $.ajax({
         type: 'GET',
         url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
