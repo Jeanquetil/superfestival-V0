@@ -29,7 +29,7 @@
           </main>
         </div>
         <div id="timetable-container" class="col-lg-4">
-          <h3>Your future timetable ...</h3>
+          <%= render "timetable"%>
         </div>
         <!-- /INTERFACE -->
 
@@ -37,9 +37,13 @@
         <script type="text/html" id="hit-template">
           <div class="hit">
             <div class="hit-content" value="{{id}}">
-              <a href="{{ event_url }}" data-method="post" data-remote="true">
-                {{ artist_name }} - {{ artist_genre}}
-              </a>
+              <% if user_signed_in? %>
+                <a href="{{ event_url }}" data-method="post" data-remote="true">
+                  {{ artist_name }} - {{ artist_genre}}
+                </a>
+              <% else %>
+                  {{ artist_name }} - {{ artist_genre}}
+              <% end %>
             </div>
             {{#best_song}}
               <audio id="music" preload="true" data-hit_id="{{id}}">
@@ -72,6 +76,8 @@
 <script>
   function clickfestival() {
     $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+    $('a.ais-menu--link:contains("1")').parent().parent().click()
+
   }
   $(document).ready(function() {
     setTimeout(function(){
@@ -82,52 +88,51 @@
   });
 </script>
 <script>
-  // $(".hit-content").mouseover(function() {
+  window.onload = function() {
 
-  //   console.log("test")
-  //   // var value = ($(this).val()) - 1;
-  //   $(".clip")[13].play();
-  //   });
-</script>
-<script>
-
-  window.onload =function() {
-    console.log("hello");
-      $('.ais-menu--list').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
-        var day = parseInt($(this).text().slice(0,1));
-        $.ajax({
+    $.ajax({
           type: 'GET',
-          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + 1
         });
+
+  setTimeout(function(){
+    $('div').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
+      var day = parseInt($(this).text().slice(0,1));
+      $.ajax({
+        type: 'GET',
+        url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
       });
+    });
 
-      if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
-        var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
-        $.ajax({
-          type: 'GET',
-          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
-        });
-      };
 
-      $('.ais-hits').on('click', "#pButton", function(){
-        console.log("hello");
-        var hit_id = $(this).data("button_id");
-        var music = $(".hit").find("[data-hit_id='" + hit_id + "']")[0]; // id for audio element
-        var pButton = $(".hit").find("[data-button_id='" + hit_id + "']")[0];
-
-          // start music
-          if (music.paused) {
-            music.play();
-            // remove play, add pause
-            pButton.className = "";
-            pButton.className = "pause";
-          } else { // pause music
-            music.pause();
-            // remove pause, add play
-            pButton.className = "";
-            pButton.className = "play";
-          }
+    if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
+      var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
+      $.ajax({
+        type: 'GET',
+        url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
       });
     };
+  }, 1400)
+
+    $('#search-timetable-container').on('click', "#pButton", function(){
+      var hit_id = $(this).data("button_id");
+      var music = $(".hit").find("[data-hit_id='" + hit_id + "']")[0]; // id for audio element
+      var pButton = $(".hit").find("[data-button_id='" + hit_id + "']")[0];
+
+        // start music
+        if (music.paused) {
+          music.play();
+          // remove play, add pause
+          pButton.className = "";
+          pButton.className = "pause";
+        } else { // pause music
+          music.pause();
+          // remove pause, add play
+          pButton.className = "";
+          pButton.className = "play";
+        }
+    });
+
+  };
 </script>
 <% end %>
