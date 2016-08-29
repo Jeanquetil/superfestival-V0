@@ -13,7 +13,7 @@ class EventsController < ApplicationController
     timetable = current_user.find_or_create_timetable_for!(@event.concert.festival, params[:day])
     @event.timetable = timetable
     @day_begin = timetable.festival.concerts.where(day: timetable.day).order(:start_time).first.start_time.to_time.hour
-    @day_end =timetable.festival.concerts.where(day: timetable.day).order(:end_time).last.end_time.to_time.hour + 1
+    @day_end = timetable.festival.concerts.where(day: timetable.day).order(:end_time).last.end_time.to_time.hour + 1
     validation = []
     timetable.events.each do |event|
       if (event.concert.start_time < @event.concert.end_time && event.concert.end_time > @event.concert.start_time)
@@ -29,8 +29,14 @@ class EventsController < ApplicationController
       @event.save
       @events = timetable.events
       @events << @event
+      @impossible_concerts = []
+      @events.each do |event|
+        impossible_by_event = timetable.festival.concerts.select('id').where("(? <= start_time AND start_time < ?) OR (? < end_time AND end_time <= ?)", event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time)
+        impossible_by_event.each do |concert|
+          @impossible_concerts << concert.id
+        end
+      end
     end
-
   end
 
   def show
@@ -40,7 +46,16 @@ class EventsController < ApplicationController
     @event.destroy
     respond_to do |format|
      format.js
-   end
+    end
+    @impossible_concerts = []
+    timetable = current_user.find_or_create_timetable_for!(@event.concert.festival, @event.timetable.day)
+    @events = timetable.events
+    @events.each do |event|
+      impossible_by_event = timetable.festival.concerts.select('id').where("(? <= start_time AND start_time < ?) OR (? < end_time AND end_time <= ?)", event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time)
+      impossible_by_event.each do |concert|
+        @impossible_concerts << concert.id
+      end
+    end
  end
 
  private

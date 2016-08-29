@@ -1,3 +1,12 @@
 var events = $('<% @events.each do |event| %><%= j render "festivals/event", event: event %><% end %>');
 $('#timetable').html('');
 $('#timetable').append(events);
+
+var impossibleIds = <%= @impossible_concerts %>;
+$('.hit').each(function() {
+  var id = parseInt($(this).attr('id'));
+  var that = $(this);
+  if(impossibleIds.includes(id)) {
+    that.parent().addClass('impossible');
+  }
+});

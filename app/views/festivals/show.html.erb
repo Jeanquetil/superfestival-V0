@@ -40,8 +40,9 @@
 
         <!-- TEMPLATES -->
         <script type="text/html" id="hit-template">
-          <div class="hit">
-            <div class="hit-content" value="{{id}}">
+
+          <div class="hit" id="{{id}}">
+            <div class="hit-content">
             {{ artist_name }} - {{ artist_genre}} / {{ start_hour }} - {{ end_hour }}
               <% if user_signed_in? %>
                 <a href="{{ event_url }}" data-method="post" data-remote="true"><i class="fa fa-plus" aria-hidden="true"></i></a>
@@ -138,4 +139,5 @@
 
   };
 </script>
+
 <% end %>
