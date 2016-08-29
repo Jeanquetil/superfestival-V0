@@ -45,11 +45,16 @@
                   {{ artist_name }} - {{ artist_genre}}
               <% end %>
             </div>
-              <audio controls class="clip">
+            {{#best_song}}
+              <audio id="music" preload="true" data-hit_id="{{id}}">
                 <source src="{{best_song}}"
                      type='audio/mp3'>
                 <p>Your user agent does not support this streaming feature</p>
               </audio>
+              <div id="audioplayer">
+                <button id="pButton" class="play" data-button_id="{{id}}"></button>
+              </div>
+            {{/best_song}}
           </div>
         </script>
 
@@ -83,30 +88,51 @@
   });
 </script>
 <script>
-  $(document).ready(function() {
+  window.onload = function() {
 
     $.ajax({
           type: 'GET',
           url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + 1
         });
 
-    setTimeout(function() {
-      $('.ais-menu--list').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
-        var day = parseInt($(this).text().slice(0,1));
-        $.ajax({
-          type: 'GET',
-          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
-        });
+  setTimeout(function(){
+    $('div').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
+      var day = parseInt($(this).text().slice(0,1));
+      $.ajax({
+        type: 'GET',
+        url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
       });
-      if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
-        var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
-        $.ajax({
-          type: 'GET',
-          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
-        });
-      }
-    }, 1000);
-  });
+    });
 
+
+    if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
+      var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
+      $.ajax({
+        type: 'GET',
+        url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+      });
+    };
+  }, 1400)
+
+    $('#search-timetable-container').on('click', "#pButton", function(){
+      var hit_id = $(this).data("button_id");
+      var music = $(".hit").find("[data-hit_id='" + hit_id + "']")[0]; // id for audio element
+      var pButton = $(".hit").find("[data-button_id='" + hit_id + "']")[0];
+
+        // start music
+        if (music.paused) {
+          music.play();
+          // remove play, add pause
+          pButton.className = "";
+          pButton.className = "pause";
+        } else { // pause music
+          music.pause();
+          // remove pause, add play
+          pButton.className = "";
+          pButton.className = "play";
+        }
+    });
+
+  };
 </script>
 <% end %>
