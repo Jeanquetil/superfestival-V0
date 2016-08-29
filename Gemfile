@@ -21,6 +21,7 @@ gem 'pundit'
 gem "algoliasearch-rails"
 gem 'icalendar', '~> 2.2.2'
 gem 'rspotify'
+gem 'rest-client'
 
 group :development, :test do
   gem 'binding_of_caller'

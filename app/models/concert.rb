@@ -1,5 +1,7 @@
 class Concert < ApplicationRecord
 
+  require 'rspotify'
+
   belongs_to :festival
   belongs_to :artist
   has_many :events, dependent: :destroy
@@ -35,6 +37,10 @@ class Concert < ApplicationRecord
     add_attribute :event_url do
       event_url
     end
+
+    add_attribute :best_song do
+      best_song
+    end
   end
 
   def artist_name
@@ -60,6 +66,14 @@ class Concert < ApplicationRecord
   def event_url
     event_url = "/concerts/#{self.id}/events/?day=#{self.day}"
     return event_url
+  end
+
+  def best_song
+    if RSpotify::Artist.search("#{self.artist.name}").first
+      if RSpotify::Artist.search("#{self.artist.name}").first.top_tracks(:FR).first
+      RSpotify::Artist.search(artist.name).first.top_tracks(:FR).first.preview_url
+      end
+    end
   end
 
 end
