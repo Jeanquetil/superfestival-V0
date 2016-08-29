@@ -1,12 +1,24 @@
 #title-show {
-  margin-top: 100px;
+  margin-top: 115px;
   margin-bottom: 20px;
 }
 
 .download {
   display: flex;
   justify-content: space-around;
-  margin-bottom: 50px;
-
+  margin-bottom: 30px;
 }
 
+#pButton{
+  font-family: FontAwesome;
+  display: inline-block;
+  cursor:pointer;
+}
+
+.play:before{
+  content: "\f04b";
+
+}
+.pause:before{
+  content: "\f04c";
+}

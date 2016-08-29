@@ -43,7 +43,7 @@ header img {
   outline: 0;
 }
 #search-input input:focus {
-  border-color: #ed5565;
+  border-color: $iceberg;
 }
 #search-input input::-webkit-input-placeholder, #search-input input:-moz-placeholder, #search-input input:-moz-placeholder, #search-input input:-ms-input-placeholder {
   font-weight: 100;
@@ -78,12 +78,9 @@ header img {
 }
 
 .ais-hits--item {
-  display: inline-block;
-  width: 152px;
-  height:50px;
+  width: 100%;
   border: solid 2px $pink;
   margin:5px;
-  overflow: hidden;
 }
 
 #hits {
@@ -291,6 +288,13 @@ header img {
   text-decoration: line-through;
   color: #ed5565;
 }
+
+.ais-menu--item__active .ais-menu--link {
+  background-color: #ed5565;
+  color: white;
+  border: none;
+}
+
 .ais-refinement-list--count,
 .ais-menu--count {
   display: none;

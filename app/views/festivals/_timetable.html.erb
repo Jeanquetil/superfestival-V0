@@ -1,15 +1,33 @@
-<h3 class="timetable-title">Timetable</h3>
-<div class="timetable" style="height: <%= day_duration * 3600 / 72 %>px">
-  <div class="time card-event" style="top:0px">Début : <%= day_begin %>h00</div>
-  <% for i in 1..hour_in_a_day %>
-  <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
-  </div>
+  <% if user_signed_in? %>
+    <div class="timetable" style="height: <%= @day_duration * 3600 / 72 %>px">
+      <div class="time card-event" style="top:0px">Début : <%= @day_begin %>h00</div>
+      <% for i in 1..@hour_in_a_day %>
+      <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
+      </div>
+      <% end %>
+      <div id="timetable">
+        <% if @timetable %>
+        <% @timetable.events.each do |event| %>
+        <%= render "event", event: event %>
+        <% end %>
+        <% end %>
+      </div>
+      <div class="time card-event" style="bottom:0px">Fin : <%= @day_end %>h00</div>
+    </div>
+  <% else %>
+    <h3 class="timetable-title">Timetable</h3>
+      <div class="timetable false" style="height: <%= @day_duration * 3600 / 72 %>px">
+      <div class="time card-event" style="top:0px">Début : <%= @day_begin %>h00</div>
+      <% for i in 1..@hour_in_a_day %>
+      <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
+      </div>
+      <% end %>
+      <div id="" class="margin-tb-10 text-center card-event concert" style="top: 50px;height:150px;">
+        <h4> You must sign in to create your timetable</h4>
+        <%= link_to user_facebook_omniauth_authorize_path, class: "btn-std" do %>
+          <%= t(".sign_in", default: "login with ") %><i class="fa fa-facebook" aria-hidden="true"></i>
+        <% end %>
+      </div>
+      <div class="time card-event" style="bottom:0px">Fin : <%= @day_end %>h00</div>
+    </div>
   <% end %>
-  <div id="timetable">
-    <% if timetable %>
-    <% timetable.events.each do |event| %>
-    <%= render "event", event: event %>
-    <% end %>
-    <% end %>
-  </div>
-  <div class="time card-event" style="bottom:0px">Fin : <%= day_end %>h00</div>

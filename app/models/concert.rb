@@ -41,6 +41,14 @@ class Concert < ApplicationRecord
     add_attribute :best_song do
       best_song
     end
+
+    add_attribute :start_hour do
+      start_hour
+    end
+
+    add_attribute :end_hour do
+      end_hour
+    end
   end
 
   def artist_name
@@ -66,6 +74,14 @@ class Concert < ApplicationRecord
   def event_url
     event_url = "/concerts/#{self.id}/events/?day=#{self.day}"
     return event_url
+  end
+
+  def start_hour
+    self.start_time.to_time.strftime("%H:%M")
+  end
+
+  def end_hour
+    self.end_time.to_time.strftime("%H:%M")
   end
 
   def best_song

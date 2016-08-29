@@ -34,5 +34,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-
+  def failure
+    flash[:alert] = ""
+    redirect_to root_path
+  end
 end
