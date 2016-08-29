@@ -58,8 +58,12 @@ class TimetablesController < ApplicationController
     tracks = []
     @timetables.each do |timetable|
       timetable.events.each do |event|
-        track = RSpotify::Artist.search(event.concert.artist.name).first.top_tracks(:FR).first
-        tracks << track
+        if RSpotify::Artist.search(event.concert.artist.name).first
+          if RSpotify::Artist.search(event.concert.artist.name).first.top_tracks(:FR).first
+            track = RSpotify::Artist.search(event.concert.artist.name).first.top_tracks(:FR).first
+            tracks << track
+          end
+        end
       end
     end
     playlist.add_tracks!(tracks)

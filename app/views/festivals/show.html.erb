@@ -10,6 +10,7 @@
          <h2 class='text-center pink-shadow' ><%= @festival.name %></h2>
         </div>
       </div>
+      <% if user_signed_in? %>
       <div class="row download">
         <div><%= link_to timetables_url(:festival => params[:id]), class: "btn-std" do %>
           <%= t("Download my timetable") %>
@@ -20,6 +21,8 @@
         <% end %>
         </div>
       </div>
+
+      <% end %>
 
       <div class="row">
          <div class="col-xs-12 col-lg-8" id="search-timetable-container">
