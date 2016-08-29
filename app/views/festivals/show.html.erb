@@ -28,6 +28,8 @@
             </div>
           </main>
         </div>
+        <h3 class="timetable-title">Timetable day<span id="day"></span></h3>
+
         <div id="timetable-container" class="col-lg-4">
           <%= render "timetable"%>
         </div>
@@ -97,9 +99,14 @@
           type: 'GET',
           url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
         });
+
       });
       if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
         var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
+
+// afficher le jour près de du titre "Timetable"
+        $('#day').text("").text(day);
+
         $.ajax({
           type: 'GET',
           url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
