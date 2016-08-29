@@ -71,6 +71,7 @@
 <script>
   function clickfestival() {
     $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+    $('a.ais-menu--link:contains("1")').parent().parent().click()
 
   }
   $(document).ready(function() {
@@ -83,8 +84,6 @@
 </script>
 <script>
   $(document).ready(function() {
-
-    // $('a[href="http://localhost:3000/festivals/1?q=&hPP=20&idx=Concert&p=0&dFR[festival_name][0]=Lollapaloozade&hFR[concert_day][0]=1"]').click();
 
     $.ajax({
           type: 'GET',
