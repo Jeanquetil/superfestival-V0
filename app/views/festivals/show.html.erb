@@ -15,17 +15,21 @@
           <%= t("Download my timetable") %>
         <% end %>
         </div>
+        <div><%= link_to user_spotify_omniauth_authorize_path, class: "btn-std" do %>
+          <%= t("Get my playlist for #{@festival.name}") %>
+        <% end %>
+        </div>
       </div>
 
       <div class="row">
          <div class="col-xs-12 col-lg-8" id="search-timetable-container">
           <header>
+            <div id="concert_day" class="facet"></div>
             <div id="search-input"></div>
           </header>
 
           <main>
             <div>
-              <div id="concert_day" class="facet"></div>
               <div id="hits"></div>
               <div id="pagination"></div>
               <span id="festival_name" class="facet hidden"></span>
@@ -115,7 +119,7 @@
         url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
       });
     };
-  }, 1400)
+  }, 1000)
 
     $('#search-timetable-container').on('click', "#pButton", function(){
       var hit_id = $(this).data("button_id");
