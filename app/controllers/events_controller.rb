@@ -11,7 +11,6 @@ class EventsController < ApplicationController
     @concert = Concert.find(params[:concert_id])
     @event = Event.new(concert: @concert)
     timetable = current_user.find_or_create_timetable_for!(@event.concert.festival, params[:day])
-    authorize @event
     @event.timetable = timetable
     @day_begin = timetable.festival.concerts.where(day: timetable.day).order(:start_time).first.start_time.to_time.hour
     @day_end =timetable.festival.concerts.where(day: timetable.day).order(:end_time).last.end_time.to_time.hour + 1
@@ -48,7 +47,6 @@ class EventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
-      authorize @event
     end
 
   # Never trust parameters from the scary internet, only allow the white list through.
