@@ -42,8 +42,12 @@ class Concert < ApplicationRecord
       best_song
     end
 
-    add_attribute :concert_id do
-      concert_id
+    add_attribute :start_hour do
+      start_hour
+    end
+
+    add_attribute :end_hour do
+      end_hour
     end
   end
 
@@ -72,16 +76,20 @@ class Concert < ApplicationRecord
     return event_url
   end
 
+  def start_hour
+    self.start_time.to_time.strftime("%H:%M")
+  end
+
+  def end_hour
+    self.end_time.to_time.strftime("%H:%M")
+  end
+
   def best_song
     if RSpotify::Artist.search("#{self.artist.name}").first
       if RSpotify::Artist.search("#{self.artist.name}").first.top_tracks(:FR).first
       RSpotify::Artist.search(artist.name).first.top_tracks(:FR).first.preview_url
       end
     end
-  end
-
-  def concert_id
-    self.id
   end
 
 end

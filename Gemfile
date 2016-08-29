@@ -16,12 +16,13 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
+gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-facebook'
+gem 'omniauth-spotify'
 gem 'pundit'
 gem "algoliasearch-rails"
 gem 'icalendar', '~> 2.2.2'
 gem 'rspotify'
-gem 'rest-client'
 
 group :development, :test do
   gem 'binding_of_caller'

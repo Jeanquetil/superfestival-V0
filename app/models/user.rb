@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook]
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, omniauth_providers: [:facebook, :spotify]
 
   has_many :timetables
 
@@ -32,6 +32,10 @@ class User < ApplicationRecord
       @timetable = Timetable.create!(user: self, festival: festival, day: day)
     end
     return @timetable
+  end
+
+  def spotify_user
+    RSpotify::User.new(self.credentials)
   end
 
 end

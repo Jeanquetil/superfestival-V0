@@ -3,7 +3,7 @@
   <h4><%= event.concert.artist.name %> // <%= event.concert.start_time.to_time.strftime("%H:%M") %> - <%= event.concert.end_time.to_time.strftime("%H:%M") %></h4>
 
     <%= link_to concert_event_path(event.concert, event), method: :delete, remote: true do %>
-      <i class="fa fa-trash" style="font-size: 20px; color: #32b796"></i>
+      <i class="fa fa-times" style="font-size: 20px; color: #32b796"></i>
     <% end %>
 
 </div>
