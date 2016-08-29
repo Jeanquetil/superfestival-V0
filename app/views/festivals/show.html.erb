@@ -29,7 +29,7 @@
           </main>
         </div>
         <div id="timetable-container" class="col-lg-4">
-          <h3>Your future timetable ...</h3>
+          <%= render "timetable"%>
         </div>
         <!-- /INTERFACE -->
 
@@ -37,9 +37,13 @@
         <script type="text/html" id="hit-template">
           <div class="hit">
             <div class="hit-content" value="{{id}}">
-              <a href="{{ event_url }}" data-method="post" data-remote="true">
-                {{ artist_name }} - {{ artist_genre}}
-              </a>
+              <% if user_signed_in? %>
+                <a href="{{ event_url }}" data-method="post" data-remote="true">
+                  {{ artist_name }} - {{ artist_genre}}
+                </a>
+              <% else %>
+                  {{ artist_name }} - {{ artist_genre}}
+              <% end %>
             </div>
               <audio controls class="clip">
                 <source src="{{best_song}}"
@@ -67,6 +71,7 @@
 <script>
   function clickfestival() {
     $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
+
   }
   $(document).ready(function() {
     setTimeout(function(){
@@ -78,6 +83,13 @@
 </script>
 <script>
   $(document).ready(function() {
+
+    // $('a[href="http://localhost:3000/festivals/1?q=&hPP=20&idx=Concert&p=0&dFR[festival_name][0]=Lollapaloozade&hFR[concert_day][0]=1"]').click();
+
+    $.ajax({
+          type: 'GET',
+          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + 1
+        });
 
     setTimeout(function() {
       $('.ais-menu--list').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
