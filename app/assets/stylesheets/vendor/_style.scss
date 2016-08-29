@@ -43,7 +43,7 @@ header img {
   outline: 0;
 }
 #search-input input:focus {
-  border-color: #ed5565;
+  border-color: $iceberg;
 }
 #search-input input::-webkit-input-placeholder, #search-input input:-moz-placeholder, #search-input input:-moz-placeholder, #search-input input:-ms-input-placeholder {
   font-weight: 100;
