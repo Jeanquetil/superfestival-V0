@@ -1,6 +1,6 @@
   <% if user_signed_in? %>
     <div class="timetable" style="height: <%= @day_duration * 3600 / 72 %>px">
-      <div class="time card-event" style="top:0px">Début : <%= @day_begin %>h00</div>
+      <div class="time card-event" style="top:-4px">Début : <%= @day_begin %>h00</div>
       <% for i in 1..@hour_in_a_day %>
       <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
       </div>
@@ -12,12 +12,12 @@
         <% end %>
         <% end %>
       </div>
-      <div class="time card-event" style="bottom:0px">Fin : <%= @day_end %>h00</div>
+      <div class="time card-event" style="bottom:-15px">Fin : <%= @day_end %>h00</div>
     </div>
   <% else %>
     <h3 class="timetable-title">Timetable</h3>
       <div class="timetable false" style="height: <%= @day_duration * 3600 / 72 %>px">
-      <div class="time card-event" style="top:0px">Début : <%= @day_begin %>h00</div>
+      <div class="time card-event" style="top:-4px">Début : <%= @day_begin %>h00</div>
       <% for i in 1..@hour_in_a_day %>
       <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
       </div>
@@ -30,6 +30,6 @@
           <h4>  <%= t(".sign_in", default: "login with ") %><i class="fa fa-facebook" aria-hidden="true"></i></h4>
         <% end %>
       </div>
-      <div class="time card-event" style="bottom:0px">Fin : <%= @day_end %>h00</div>
+      <div class="time card-event" style="bottom: -15px">Fin : <%= @day_end %>h00</div>
     </div>
   <% end %>
