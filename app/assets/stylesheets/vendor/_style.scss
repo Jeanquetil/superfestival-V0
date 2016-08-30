@@ -300,6 +300,8 @@ header img {
   background-color: #ed5565;
   color: white;
   border: none;
+  pointer-events: none;
+  cursor: default;
 }
 
 .ais-refinement-list--count,
