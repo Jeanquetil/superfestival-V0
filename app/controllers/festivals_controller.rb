@@ -4,6 +4,8 @@ class FestivalsController < ApplicationController
 
   def show
     @festival = Festival.find(params[:id])
+    session[:current_festival_id] = @festival.id
+
     if current_user
       @timetables = @festival.timetables
       @timetable = current_user.find_or_create_timetable_for!(@festival, 1)
