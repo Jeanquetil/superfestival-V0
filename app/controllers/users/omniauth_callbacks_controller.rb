@@ -16,17 +16,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     current_user.update(hash_spotify: spotify_user.to_hash)
 
     festival_id = session[:current_festival_id]
+    festival = Festival.find(festival_id)
 
-    if festival_id
-      redirect_to get_playlist_path(festival: festival_id)
-    else
-      redirect_to root_path
-    end
+    redirect_to get_playlist_path(festival: festival_id)
+    flash[:notice] = "Your Spotify playlist for #{festival.name} has been created."
   end
 
 
   def failure
-    flash[:alert] = "Please accept the conditions"
+    flash[:alert] = "Please accept the conditions."
     redirect_to root_path
   end
 end

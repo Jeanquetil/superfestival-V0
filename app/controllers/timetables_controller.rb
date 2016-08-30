@@ -68,15 +68,6 @@ class TimetablesController < ApplicationController
     end
     playlist.add_tracks!(tracks)
     redirect_to festival_path(@festival)
-
-
-
-    # spotify_user.create = RSpotify::User.new(token_spotify:)
-    # spotify_user.whatever
-    # redirect
-    # spotify.html.erb
-
-
   end
 
   private
