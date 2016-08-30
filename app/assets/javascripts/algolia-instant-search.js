@@ -14,14 +14,12 @@ app({
 // });
 
 function app(opts) {
-  console.log(opts);
   var search = instantsearch({
     appId: opts.appId,
     apiKey: opts.apiKey,
     indexName: opts.indexName,
     urlSync: true
   });
-  console.log(search);
   search.addWidget(
     instantsearch.widgets.searchBox({
       container: '#search-input',
@@ -73,6 +71,14 @@ function app(opts) {
     })
     );
 
+    var resultsWidget = {
+      render: function(params) {
+        var results = params.results.hits;
+        console.log(results);
+      }
+    };
+
+    search.addWidget(resultsWidget);
 
   search.start();
 }
