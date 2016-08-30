@@ -29,8 +29,7 @@ class EventsController < ApplicationController
       @event.save
       @events = timetable.events
       @events << @event
-      @impossible_concerts = []
-      set_impossible_concerts(@events, timetable)
+      set_impossible_concerts(@event)
     end
   end
 
@@ -42,9 +41,7 @@ class EventsController < ApplicationController
     respond_to do |format|
      format.js
     end
-    timetable = current_user.find_or_create_timetable_for!(@event.concert.festival, @event.timetable.day)
-    @events = timetable.events
-    set_impossible_concerts(@events, timetable)
+    set_impossible_concerts(@event)
  end
 
  private
@@ -58,12 +55,14 @@ class EventsController < ApplicationController
     params.require(:event).permit(:timetable_id, :concert_id)
   end
 
-  def set_impossible_concerts(events, timetable)
+  def set_impossible_concerts(event)
     @impossible_concerts = []
-    events.each do |event|
-      impossible_by_event = timetable.festival.concerts.select('id').where("(? <= start_time AND start_time < ?) OR (? < end_time AND end_time <= ?)", event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time)
-      impossible_by_event.each do |concert|
-        @impossible_concerts << concert.id
+    event.timetable.festival.timetables.each do |timetable|
+      timetable.events.each do |event|
+        impossible_by_event = event.concert.festival.concerts.select('id').where("(? <= start_time AND start_time < ?) OR (? < end_time AND end_time <= ?)", event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time)
+        impossible_by_event.each do |concert|
+          @impossible_concerts << concert.id
+        end
       end
     end
     return @impossible_concerts

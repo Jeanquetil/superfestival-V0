@@ -1,5 +1,7 @@
 $('#timetable-container').html('');
 $('#timetable-container').html('<%= j render "timetable", { timetable: @timetable, day_begin: @day_begin, day_end: @day_end, day_duration: @day_duration, hour_in_a_day: @hour_in_a_day } %>');
-var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
-var timetable_title = $('<h3 class="timetable-title">Timetable Day' + day + '</h3>');
-$('#timetable-container').prepend(timetable_title);
+$('#timetable-container').prepend('<h3 class="timetable-title">Timetable Day <%= @timetable.day %> </h3>');
+
+
+// var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
+// var timetable_title = $('<h3 class="timetable-title">Timetable Day' + day +'</h3>');

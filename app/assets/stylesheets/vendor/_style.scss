@@ -340,6 +340,8 @@ header img {
   background-color: $pink;
   color: white;
   border: none;
+  pointer-events: none;
+  cursor: default;
 }
 
 .ais-refinement-list--count,

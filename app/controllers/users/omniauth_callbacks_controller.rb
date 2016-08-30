@@ -14,10 +14,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def spotify
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
     current_user.update(hash_spotify: spotify_user.to_hash)
-
     festival_id = session[:current_festival_id]
     festival = Festival.find(festival_id)
-
     redirect_to get_playlist_path(festival: festival_id)
     flash[:notice] = "Your Spotify playlist for #{festival.name} has been created."
   end
