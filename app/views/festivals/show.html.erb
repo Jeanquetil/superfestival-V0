@@ -104,9 +104,9 @@
   window.onload = function() {
 
     $.ajax({
-          type: 'GET',
-          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + 1
-        });
+      type: 'GET',
+      url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + 1
+    });
 
     setTimeout(function(){
       $('div').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */

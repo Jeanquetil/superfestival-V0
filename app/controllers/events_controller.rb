@@ -9,6 +9,7 @@ class EventsController < ApplicationController
 
   def create
     @concert = Concert.find(params[:concert_id])
+    @festival = @concert.festival
     @event = Event.new(concert: @concert)
     timetable = current_user.find_or_create_timetable_for!(@event.concert.festival, params[:day])
     @event.timetable = timetable
