@@ -88,10 +88,15 @@
 
   }
   $(document).ready(function() {
+
     setTimeout(function(){
       if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
         setTimeout(clickfestival, 100)
       }
+
+    var impossibleIds = <%= j @impossible_concerts.to_json %>;
+    setImpossibleEvents(impossibleIds);
+
     }, 400)
   });
 </script>
@@ -112,7 +117,6 @@
       });
     });
 
-
     if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
       var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
 
@@ -123,6 +127,7 @@
         url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
       });
     };
+
   }, 1000)
 
     $('#search-timetable-container').on('click', "#pButton", function(){

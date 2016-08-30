@@ -30,12 +30,7 @@ class EventsController < ApplicationController
       @events = timetable.events
       @events << @event
       @impossible_concerts = []
-      @events.each do |event|
-        impossible_by_event = timetable.festival.concerts.select('id').where("(? <= start_time AND start_time < ?) OR (? < end_time AND end_time <= ?)", event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time)
-        impossible_by_event.each do |concert|
-          @impossible_concerts << concert.id
-        end
-      end
+      set_impossible_concerts(@events, timetable)
     end
   end
 
@@ -47,25 +42,30 @@ class EventsController < ApplicationController
     respond_to do |format|
      format.js
     end
-    @impossible_concerts = []
     timetable = current_user.find_or_create_timetable_for!(@event.concert.festival, @event.timetable.day)
     @events = timetable.events
-    @events.each do |event|
+    set_impossible_concerts(@events, timetable)
+ end
+
+ private
+    # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:timetable_id, :concert_id)
+  end
+
+  def set_impossible_concerts(events, timetable)
+    @impossible_concerts = []
+    events.each do |event|
       impossible_by_event = timetable.festival.concerts.select('id').where("(? <= start_time AND start_time < ?) OR (? < end_time AND end_time <= ?)", event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time)
       impossible_by_event.each do |concert|
         @impossible_concerts << concert.id
       end
     end
- end
-
- private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def event_params
-    params.require(:event).permit(:timetable_id, :concert_id)
+    return @impossible_concerts
   end
 end
