@@ -7,7 +7,7 @@ Devise.setup do |config|
     image_size: 'square',  # 50x50, guaranteed ratio
     secure_image_url: true
   config.omniauth :spotify, ENV["SPOTIFY_ID"], ENV["SPOTIFY_SECRET"],
-    scope: 'playlist-modify-public user-top-read'
+    scope: 'playlist-modify-public user-top-read user-library-read'
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.

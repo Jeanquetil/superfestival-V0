@@ -49,6 +49,10 @@ class Concert < ApplicationRecord
     add_attribute :end_hour do
       end_hour
     end
+
+    add_attribute :in_spotify do
+      in_spotify
+    end
   end
 
   def artist_name
