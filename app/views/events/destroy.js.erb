@@ -1,13 +1,5 @@
-var impossibleIds = <%= @impossible_concerts %>;
-$('.hit').each(function() {
-  console.log("ok");
-  $(this).parent().removeClass('impossible');
-  var id = parseInt($(this).attr('id'));
-  var that = $(this);
-  if(impossibleIds.includes(id)) {
-    that.parent().addClass('impossible');
-  }
-});
+var impossibleIds = <%= j @impossible_concerts.to_json %>;
+setImpossibleEvents(impossibleIds);
 
 $('#event-<%= @event.id %>').remove();
 
