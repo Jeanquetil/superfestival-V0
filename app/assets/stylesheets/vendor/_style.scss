@@ -83,10 +83,14 @@ header img {
   margin:5px;
 }
 
+.ais-menu--link:before {
+  content: "Concerts of day ";
+}
+
 #hits {
   margin: 4px 0;
   padding: 10px 0;
-  border-top: 2px solid #eee;
+  // border-top: 2px solid #eee;
 }
 .hit {
   font-size: 0;
@@ -242,6 +246,10 @@ header img {
   margin-bottom: 3px;
 }
 
+.ais-menu--header {
+  display: none !important;
+}
+
 .ais-refinement-list--label,
 .ais-menu--link {
   font-size: 13px;
@@ -283,8 +291,7 @@ header img {
 .ais-menu--link:hover, .ais-menu--item__active .ais-menu--link {
   color: #ed5565;
 }
-.ais-refinement-list--item__active .ais-refinement-list--label:hover,
-.ais-menu--item__active .ais-menu--link:hover {
+.ais-refinement-list--item__active .ais-refinement-list--label:hover {
   text-decoration: line-through;
   color: #ed5565;
 }

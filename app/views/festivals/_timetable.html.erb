@@ -22,10 +22,12 @@
       <div class="border-top card-event" style="top:<%= i * 50 %>px;height: <%= 3600 / 72 %>px;">
       </div>
       <% end %>
-      <div id="" class="margin-tb-10 text-center card-event concert" style="top: 50px;height:150px;">
-        <h4> You must sign in to create your timetable</h4>
-        <%= link_to user_facebook_omniauth_authorize_path, class: "btn-std" do %>
-          <%= t(".sign_in", default: "login with ") %><i class="fa fa-facebook" aria-hidden="true"></i>
+      <div id="" class="margin-tb-10 text-center card-event concert" style="top: 50px;height:60px;">
+        <h4> You must be logged to create your timetable</h4>
+      </div>
+      <div id="" class="margin-tb-10 text-center card-event concert" style="top: 110px;height:20px; padding-bottom:15px; color: $pink;">
+        <%= link_to user_facebook_omniauth_authorize_path do %>
+          <h4>  <%= t(".sign_in", default: "login with ") %><i class="fa fa-facebook" aria-hidden="true"></i></h4>
         <% end %>
       </div>
       <div class="time card-event" style="bottom:0px">Fin : <%= @day_end %>h00</div>
