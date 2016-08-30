@@ -85,8 +85,8 @@
   function clickfestival() {
     $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
     $('a.ais-menu--link:contains("1")').parent().parent().click()
-
   }
+
   $(document).ready(function() {
 
     setTimeout(function(){
@@ -94,8 +94,8 @@
         setTimeout(clickfestival, 100)
       }
 
-    var impossibleIds = <%= j @impossible_concerts.to_json %>;
-    setImpossibleEvents(impossibleIds);
+      var impossibleIds = <%= j @impossible_concerts.to_json %>;
+      setImpossibleEvents(impossibleIds);
 
     }, 400)
   });
@@ -108,27 +108,32 @@
           url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + 1
         });
 
-  setTimeout(function(){
-    $('div').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
-      var day = parseInt($(this).text().slice(0,1));
-      $.ajax({
-        type: 'GET',
-        url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+    setTimeout(function(){
+      $('div').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
+
+        var day = parseInt($(this).text().slice(0,1));
+        var impossibleIds = <%= j @impossible_concerts.to_json %>;
+        $.ajax({
+          type: 'GET',
+          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day,
+          success: function() {
+            setImpossibleEvents(impossibleIds);
+          }
+        });
+
       });
-    });
 
-    if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
-      var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
+      if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
+        var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
 
-      // afficher le jour près de du titre "Timetable"
+        $.ajax({
+          type: 'GET',
+          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+        });
 
-      $.ajax({
-        type: 'GET',
-        url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
-      });
-    };
+      };
 
-  }, 1000)
+    }, 1000)
 
     $('#search-timetable-container').on('click', "#pButton", function(){
       var hit_id = $(this).data("button_id");
@@ -148,7 +153,6 @@
           pButton.className = "play";
         }
     });
-
   };
 </script>
 
