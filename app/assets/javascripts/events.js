@@ -5,9 +5,9 @@ function setImpossibleEvents(impossibleIds) {
     $(this).parent().removeClass('impossible');
     var id = parseInt($(this).attr('id'));
     if(impossibleIds.includes(id)) {
-      console.log(impossibleIds);
-      console.log(this);
       $(this).parent().addClass('impossible');
     }
   });
 }
+
+
