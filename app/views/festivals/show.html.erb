@@ -7,23 +7,20 @@
    <div class="container">
 
       <div class="row">
-       <div id="title-show">
-         <h2 class='text-center pink-shadow' ><%= @festival.name %></h2>
+        <div id="title-show">
+          <h2 class='text-center pink-shadow' ><%= @festival.name %></h2>
         </div>
-      </div>
       <% if user_signed_in? %>
-      <div class="row download">
-        <div><%= link_to timetables_url(:festival => params[:id]), class: "btn-std" do %>
-          <%= t("Download my timetable") %>
-        <% end %>
+        <div class="download">
+          <%= link_to timetables_url(:festival => params[:id]), class: "btn-std" do %>
+            <i class="fa fa-download" aria-hidden="true"></i> <%= "My timetable" %>
+          <% end %>
+          <%= link_to user_spotify_omniauth_authorize_path, class: "btn-spotify" do %>
+            <i class="fa fa-spotify" aria-hidden="true"></i> <%= "Get my playlist" %>
+          <% end %>
         </div>
-        <div><%= link_to user_spotify_omniauth_authorize_path, class: "btn-std" do %>
-          <%= t("Get my playlist for #{@festival.name}") %>
-        <% end %>
-        </div>
-      </div>
-
       <% end %>
+      </div>
 
       <div class="row">
          <div class="col-xs-12 col-lg-8" id="search-timetable-container">
@@ -51,18 +48,21 @@
 
           <div class="hit" id="{{id}}">
             <div class="hit-content">
-            {{ artist_name }} - {{ artist_genre}} / {{ start_hour }} - {{ end_hour }}
-              <% if user_signed_in? %>
-                <a href="{{ event_url }}" data-method="post" data-remote="true"><i class="fa fa-plus" aria-hidden="true"></i></a>
-              <% end %>
-              {{#best_song}}
-                <audio id="music" preload="true" data-hit_id="{{id}}">
-                  <source src="{{best_song}}"
-                       type='audio/mp3'>
-                  <p>Your user agent does not support this streaming feature</p>
-                </audio>
-                <a id="pButton" class="play" data-button_id="{{id}}"></a>
-              {{/best_song}}
+              <h5><span class="box-shadow">{{ artist_name }}</h5></span>
+              <p>{{ artist_genre}} // {{ start_hour }} - {{ end_hour }}</p>
+              <div class="margin-tb-7-2">
+                <% if user_signed_in? %>
+                  <a href="{{ event_url }}" data-method="post" data-remote="true" data-tooltip="Add to my timetable"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                <% end %>
+                {{#best_song}}
+                  <audio id="music" preload="true" data-hit_id="{{id}}">
+                    <source src="{{best_song}}"
+                         type='audio/mp3'>
+                    <p>Your user agent does not support this streaming feature</p>
+                  </audio>
+                  <span data-tooltip="Listen"><a id="pButton" class="play" data-button_id="{{id}}"></a></span>
+                {{/best_song}}
+              </div>
             </div>
           </div>
         </script>

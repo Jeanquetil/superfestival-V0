@@ -1,13 +1,27 @@
 .btn-std {
   color: $pink;
-  border: solid 2px $pink;
+  border: solid 1px $pink;
   padding: 7px 25px;
-  font-weight: bold;
   letter-spacing: 1px;
+  border-radius: 30px;
   margin: 0 15px;
   transition: all 0.3s ease;
   &:hover {
     color:white;
     background-color: $pink;
+  }
+}
+
+.btn-spotify {
+  color: #24CF5F;
+  border: solid 1px #24CF5F;
+  padding: 7px 25px;
+  letter-spacing: 1px;
+  border-radius: 30px;
+  margin: 0 15px;
+  transition: all 0.3s ease;
+  &:hover {
+    color:white;
+    background-color: #24CF5F;
   }
 }

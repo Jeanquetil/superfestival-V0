@@ -6,13 +6,17 @@
 .download {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
+  margin: 40px 0 20px 0;
 }
 
 #pButton{
   font-family: FontAwesome;
   display: inline-block;
   cursor:pointer;
+  transition: all 0.3s ease;
+  &:hover{
+    transform: scale(1.5);
+  }
 }
 
 .impossible {
@@ -24,7 +28,11 @@
 }
 .play:before{
   content: "\f04b";
+  color: #24CF5F;
+  font-size:18px;
 }
 .pause:before{
   content: "\f04c";
+  font-size:18px;
+  color: $pink;
 }

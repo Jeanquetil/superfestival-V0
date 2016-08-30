@@ -32,7 +32,7 @@ function app(opts) {
   search.addWidget(
     instantsearch.widgets.hits({
       container: '#hits',
-      hitsPerPage: 20,
+      hitsPerPage: 8,
       templates: {
         item: getTemplate('hit'),
         empty: getTemplate('no-results')
