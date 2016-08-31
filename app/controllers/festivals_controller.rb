@@ -10,11 +10,10 @@ class FestivalsController < ApplicationController
       @timetables = @festival.timetables
       @timetable = current_user.find_or_create_timetable_for!(@festival, 1)
       set_timetable_parameters(@festival, 1)
+      set_impossible_concerts(@timetable)
     else
       set_timetable_parameters(@festival, 1)
     end
-
-    set_impossible_concerts(@timetable)
   end
 
   def display_timetable
