@@ -1,16 +1,15 @@
 /* Main class */
 .navbar-wagon {
-  transition: all 0.3s ease;
-  background-color: $iceberg;
   display: flex;
   justify-content: center;
   height: 70px;
   padding: 0px 30px;
   align-items: center;
-}
-
-.lighter-background {
-  background-color: #E0FDFF;
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  z-index:1030;
 }
 
 .box-shadow {
