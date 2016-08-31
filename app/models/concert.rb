@@ -70,7 +70,8 @@ class Concert < ApplicationRecord
   def concert_day
     @festival_start = self.festival.start_date
     @day_of_concert = concert.day
-    @day_name = (@festival_start - day_of_concert + 1).strftime("%A")
+    @day_name = (@festival_start + day_of_concert - 1).strftime("%A %d")
+    return @day_name
   end
 
   def festival_begin
