@@ -6,7 +6,7 @@
 .download {
   display: flex;
   justify-content: center;
-  margin: 40px 0 20px 0;
+  margin: 20px 0 20px 0;
 }
 
 #pButton{
@@ -35,4 +35,12 @@
   content: "\f04c";
   font-size:18px;
   color: $pink;
+}
+
+#header-timetable-search{
+  margin-top: 65px;
+}
+
+#timetable-container{
+  margin-top: -25px;
 }

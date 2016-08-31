@@ -81,10 +81,7 @@ header img {
   width: 48%;
   border: solid 1px $pink;
   margin:5px;
-}
-
-.ais-menu--link:before {
-  content: "DAY ";
+  min-height: 110px;
 }
 
 #hits {
