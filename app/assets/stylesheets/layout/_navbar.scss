@@ -3,6 +3,7 @@
   transition: all 0.3s ease;
   background-color: $iceberg;
   display: flex;
+  justify-content: center;
   height: 70px;
   padding: 0px 30px;
   align-items: center;
@@ -28,6 +29,9 @@
 /* Navbar logo */
 .navbar-wagon-brand img {
   width: 50px;
+  position: absolute;
+  left: 20px;
+  top: 10px;
 }
 
 /* Navbar right section (with form, links, button) */

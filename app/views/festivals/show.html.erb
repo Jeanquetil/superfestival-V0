@@ -7,9 +7,6 @@
    <div class="container">
 
       <div class="row">
-        <div id="title-show">
-          <h2 class='text-center pink-shadow' ><%= @festival.name %></h2>
-        </div>
       <% if user_signed_in? %>
         <div class="download">
           <%= link_to timetables_url(:festival => params[:id]), class: "btn-std" do %>

@@ -4,6 +4,12 @@
     <%= image_tag "logo.png" %>
   <% end %>
 
+  <% if params[:action] == "show" && params[:controller] == "festivals" %>
+
+    <h2 class='pink-shadow' ><%= @festival.name %></h2>
+
+  <% end %>
+
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm", id="login-btn">
 
