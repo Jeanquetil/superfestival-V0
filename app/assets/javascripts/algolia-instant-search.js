@@ -35,9 +35,6 @@ function app(opts) {
       templates: {
         item: getTemplate('hit'),
         empty: getTemplate('no-results')
-      },
-      render: function(params) {
-        var results = params.results;
       }
     })
     );
@@ -45,10 +42,7 @@ function app(opts) {
   search.addWidget(
     instantsearch.widgets.pagination({
       container: '#pagination',
-      scrollTo: '#search-input',
-      render: function(params) {
-        var results = params.results;
-      }
+      scrollTo: '#search-input'
     })
     );
 
@@ -61,9 +55,6 @@ function app(opts) {
       operator: 'or',
       templates: {
         header: '<h5>Festival</h5>'
-      },
-      render: function(params) {
-        var results = params.results;
       }
     })
     );
@@ -77,16 +68,13 @@ function app(opts) {
       operator: 'or',
       templates: {
         header: '<h5>Concert Day</h5>'
-      },
-      render: function(params) {
-        var results = params.results;
       }
     })
     );
 
     var resultsWidget = {
       render: function(params) {
-        var results = params.results.hits.artist_name;
+        var results = params.results.hits;
       }
     };
 
