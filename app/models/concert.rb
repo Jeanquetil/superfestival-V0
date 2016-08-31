@@ -49,10 +49,6 @@ class Concert < ApplicationRecord
     add_attribute :end_hour do
       end_hour
     end
-
-    add_attribute :in_spotify do
-      in_spotify
-    end
   end
 
   def artist_name
@@ -68,7 +64,10 @@ class Concert < ApplicationRecord
   end
 
   def concert_day
-    day
+    @festival_start = self.festival.start_date
+    @day_of_concert = day
+    @day_name = (@festival_start + @day_of_concert - 1).strftime("%A %d")
+    return @day_name
   end
 
   def festival_begin
