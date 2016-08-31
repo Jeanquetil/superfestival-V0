@@ -1,10 +1,19 @@
 <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
-  <%= link_to festival_path(festival) do %>
-  <div class="button">
-    <p class="btnText"><%= festival.name %></p>
-    <div class="btnTwo">
-      <i class="btnText2 fa fa-eye" aria-hidden="true"></i>
-    </div>
+  <% unless festival.concerts.first == nil %>
+    <%= link_to festival_path(festival) do %>
+      <div class="button">
+        <p class="btnText"><%= festival.name %></p>
+        <div class="btnTwo">
+          <i class="btnText2 fa fa-eye" aria-hidden="true"></i>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="button3">
+      <p class="btnText3"><%= festival.name %></p>
+      <div class="btnTwo3">
+        <p>line-up incoming</p>
+      </div>
   </div>
   <% end %>
 </div>
