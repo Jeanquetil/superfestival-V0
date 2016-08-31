@@ -5,8 +5,8 @@
 
  <div class="wrapper">
    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-lg-4">
+      <div class="row" id="header-timetable-search">
+        <div class="col-xs-12 col-lg-8">
           <header>
             <div id="search-input"></div>
           </header>
@@ -14,10 +14,10 @@
         <div class="col-xs-12 col-lg-4">
           <% if user_signed_in? %>
             <div class="download">
-              <%= link_to timetables_url(:festival => params[:id]), class: "btn-std" do %>
+              <%= link_to timetables_url(:festival => params[:id]), class: "btn-std text-center" do %>
                 <i class="fa fa-download" aria-hidden="true"></i> <%= "My timetable" %>
               <% end %>
-              <%= link_to user_spotify_omniauth_authorize_path, class: "btn-spotify" do %>
+              <%= link_to user_spotify_omniauth_authorize_path, class: "btn-spotify text-center" do %>
                 <i class="fa fa-spotify" aria-hidden="true"></i> <%= "Get my playlist" %>
               <% end %>
             </div>
@@ -30,12 +30,12 @@
          <div class="col-xs-12 col-lg-8" id="search-timetable-container">
           <header>
             <div id="concert_day" class="facet"></div>
+            <div id="pagination"></div>
           </header>
 
           <main>
             <div>
               <div id="hits"></div>
-              <div id="pagination"></div>
               <span id="festival_name" class="facet hidden"></span>
             </div>
           </main>
