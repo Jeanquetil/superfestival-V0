@@ -14,7 +14,6 @@ class FestivalsController < ApplicationController
     else
       set_timetable_parameters(@festival, 1)
     end
-
   end
 
   def display_timetable
