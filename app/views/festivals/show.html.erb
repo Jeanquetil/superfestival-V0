@@ -113,13 +113,9 @@
       $('div').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
 
         var day = parseInt($(this).text().slice(0,1));
-        var impossibleIds = <%= j @impossible_concerts.to_json %>;
         $.ajax({
           type: 'GET',
-          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day,
-          success: function() {
-            setImpossibleEvents(impossibleIds);
-          }
+          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
         });
 
       });
