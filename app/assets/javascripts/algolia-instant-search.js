@@ -85,8 +85,7 @@ function app(opts) {
 
     var resultsWidget = {
       render: function(params) {
-        var results = params.results.hits;
-        console.log(results);
+        var results = params.results.hits.artist_name;
       }
     };
 
