@@ -40,7 +40,7 @@
       <% if user_signed_in? && current_user.facebook_picture_url %>
         <%= image_tag current_user.facebook_picture_url, height: 50, width: 50 %>
       <% else %>
-        <%= link_to user_facebook_omniauth_authorize_path, class: "btn-std" do %>
+        <%= link_to user_facebook_omniauth_authorize_path, class: "btn-std", id: "login" do %>
           <%= t(".sign_in", default: "login with ") %><i class="fa fa-facebook" aria-hidden="true"></i>
         <% end %>
       <% end %>
