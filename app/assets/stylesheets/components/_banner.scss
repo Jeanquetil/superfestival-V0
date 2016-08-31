@@ -1,11 +1,13 @@
 .banner {
-  background-color: $iceberg;
+  background-image: image-url("fond.png");
+  background-size: contain !important;
   color: white;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   position:relative;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
 }
 .banner h1 {
   font-size: 100px;
@@ -16,11 +18,15 @@
 .banner p {
   letter-spacing: 4px;
   color: $pink;
-  font-size: 20px;
+  font-size: 3vh;
+  margin-top:50px;
+  font-weight:lighter;
+  font-style:italic;
 }
 
-.banner .fa {
-  color: $pink;
+.banner #arrow {
+  width:2.4%;
+  margin-bottom:14px;
 }
 
 #scrolldown {
@@ -30,4 +36,16 @@
   right: 0;
   margin-left: auto;
   margin-right: auto;
+}
+
+.banner #typo {
+  width:70%;
+}
+
+.banner #legend {
+  background-color: white;
+  box-shadow: 0px 0px 10px -3px #469ae0;
+  width: 70%;
+  margin: auto;
+  border-radius: 5px;
 }
