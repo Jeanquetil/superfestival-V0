@@ -12,6 +12,7 @@
 //   apiKey: '6be0576ff61c053d5f9a3225e2a90f76',
 //   indexName: 'instant_search'
 // });
+//
 
 function app(opts) {
   var search = instantsearch({
@@ -26,6 +27,7 @@ function app(opts) {
       placeholder: 'Search for Concerts'
     })
     );
+
 
   // search.addWidget(
   //   instantsearch.widgets.hits({
@@ -49,6 +51,16 @@ function app(opts) {
   //     scrollTo: '#search-input',
   //   })
   // );
+  // search.addWidget(
+  //   instantsearch.widgets.hits({
+  //     container: '#hits',
+  //     hitsPerPage: 10,
+  //     templates: {
+  //       item: getTemplate('hit'),
+  //       empty: getTemplate('no-results')
+  //     }
+  //   })
+  //   );
 
   search.addWidget(
     instantsearch.widgets.refinementList({
@@ -59,7 +71,7 @@ function app(opts) {
       operator: 'or',
       templates: {
         header: '<h5>Festival</h5>'
-      },
+      }
     })
     );
 
@@ -72,7 +84,7 @@ function app(opts) {
       operator: 'or',
       templates: {
         header: '<h5>Concert Day</h5>'
-      },
+      }
     })
     );
 

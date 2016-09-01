@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" id="festiv">
   <% unless festival.concerts.first == nil %>
     <%= link_to festival_path(festival) do %>
       <div class="button">
@@ -12,8 +12,8 @@
     <div class="button3">
       <p class="btnText3"><%= festival.name %></p>
       <div class="btnTwo3">
-        <p>line-up incoming</p>
+        <p>line-up incoming ...</p>
       </div>
-  </div>
+    </div>
   <% end %>
 </div>
