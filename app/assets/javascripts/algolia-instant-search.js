@@ -94,23 +94,39 @@ function app(opts) {
         var results = params.results;
         $('.ais-hits').html('');
         results.hits.forEach(function(hit) {
-          var hitHtml = '<div class="ais-hits--item">' +
-                        '<div class="hit" id="' + hit.id + '" value="' + hit.day + '">' +
-                          '<div class="hit-content">' +
-                            '<h5><span class="box-shadow">' + hit.artist_name + '</h5></span>' +
-                            '<p>' + hit.artist_genre + ' // ' + hit.start_hour + ' - ' + hit.end_hour + '</p>' +
-                            '<div class="margin-tb-7-2">' +
-                              '<a href="' + hit.event_url +'" data-method="post" data-remote="true" data-tooltip="Add to my timetable"><i class="fa fa-plus" aria-hidden="true"></i></a>' +
-                              '<audio id="music" preload="true" data-hit_id="' + hit.id + '">' +
-                                '<source src="' + hit.best_song + '" type="audio/mp3">' +
-                                '<p>Your user agent does not support this streaming feature</p>' +
-                              '</audio>' +
-                              '<span data-tooltip="Listen"><a id="pButton" class="play" data-button_id="' + hit.id + '"></a></span>' +
+          if (hit.best_song != null){
+            var hitHtml = '<div class="ais-hits--item">' +
+                          '<div class="hit" id="' + hit.id + '" value="' + hit.day + '">' +
+                            '<div class="hit-content">' +
+                              '<h5><span class="box-shadow">' + hit.artist_name + '</h5></span>' +
+                              '<p>' + hit.artist_genre + ' // ' + hit.start_hour + ' - ' + hit.end_hour + '</p>' +
+                              '<div class="margin-tb-7-2">' +
+                                '<a href="' + hit.event_url +'" data-method="post" data-remote="true" data-tooltip="Add to my timetable"><i class="fa fa-plus" aria-hidden="true"></i></a>' +
+                                '<audio id="music" preload="true" data-hit_id="' + hit.id + '">' +
+                                  '<source src="' + hit.best_song + '" type="audio/mp3">' +
+                                  '<p>Your user agent does not support this streaming feature</p>' +
+                                '</audio>' +
+                                '<span data-tooltip="Listen"><a id="pButton" class="play" data-button_id="' + hit.id + '"></a></span>' +
+                              '</div>' +
                             '</div>' +
                           '</div>' +
-                        '</div>' +
-                      '</div>'
-          hitHtml = $(hitHtml);
+                        '</div>'
+            hitHtml = $(hitHtml);
+          }
+          else {
+            var hitHtml = '<div class="ais-hits--item">' +
+                          '<div class="hit" id="' + hit.id + '" value="' + hit.day + '">' +
+                            '<div class="hit-content">' +
+                              '<h5><span class="box-shadow">' + hit.artist_name + '</h5></span>' +
+                              '<p>' + hit.artist_genre + ' // ' + hit.start_hour + ' - ' + hit.end_hour + '</p>' +
+                              '<div class="margin-tb-7-2">' +
+                                '<a href="' + hit.event_url +'" data-method="post" data-remote="true" data-tooltip="Add to my timetable"><i class="fa fa-plus" aria-hidden="true"></i></a>' +
+                              '</div>' +
+                            '</div>' +
+                          '</div>' +
+                        '</div>'
+            hitHtml = $(hitHtml);
+          }
           if (opts.impossibleIds == null) {
             $('.ais-hits').append(hitHtml);
           }
