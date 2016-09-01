@@ -13,6 +13,16 @@
   }
 }
 
+.btn-std-light {
+  font-size:15px;
+  color: $pink;
+  border: solid 1px $pink;
+  padding: 7px 10px;
+  letter-spacing: 1px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
 .active-day {
   font-size:15px;
   border: solid 1px $pink;

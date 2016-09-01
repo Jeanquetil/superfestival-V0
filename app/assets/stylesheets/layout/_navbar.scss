@@ -141,3 +141,12 @@
   display: flex;
   justify-content: center;
 }
+
+.mobile {
+  position: absolute;
+  right: 20px;
+}
+
+.mobile a {
+  color: $pink;
+}
