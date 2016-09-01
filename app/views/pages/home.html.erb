@@ -1,10 +1,9 @@
 <div class="banner full-vh">
   <div class="banner-content">
+    <%= image_tag "waves.png", id:"top-waves" %>
     <%= image_tag "typo.png", id:"typo" %>
-    <div id="legend"><p>manage your own festival's timetable</p></div>
-    <div id="scrolldown">
-      <a href="#" id="scroll"><%= image_tag "arrow.png", id:"arrow" %></i></a>
-    </div>
+    <p>optimize your music festival's experience</p>
+    <%= image_tag "waves.png" %>
   </div>
 </div>
 <%= render 'shared/flashes' %>
@@ -26,25 +25,20 @@
       <div class="row">
         <h2 class="text-center pink-shadow">concept</h2>
         <hr>
-        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
-          <img src="https://jeanquetil.github.io/airbnb-static/images/beer.png" />
-          <h3>Too many</h3>
-          <p>Too many artist's festival ?</p>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
-        <img src="https://jeanquetil.github.io/airbnb-static/images/dollar.png" />
+        <div class="col-xs-12 col-sm-4 col-md-4 text-center">
+          <%= image_tag "list-2.png", class:"picto" %>
           <h3>Choose</h3>
           <p>Choose the artists you wanna see.</p>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
-        <img src="https://jeanquetil.github.io/airbnb-static/images/globe.png" />
-          <h3>Schedule</h3>
-          <p>It'll build your festival's schedule.</p>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-3 text-center">
-        <img src="https://jeanquetil.github.io/airbnb-static/images/heart.png" />
+        <div class="col-xs-12 col-sm-4 col-md-4 text-center">
+        <%= image_tag "calendar.png", class:"picto" %>
           <h3>Export</h3>
-          <p>Connect your schedule to your Smartphone.</p>
+          <p>Download your ical festival's schedule.</p>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-md-4 text-center">
+        <%= image_tag "spotify.png", class:"picto" %>
+          <h3>Listen</h3>
+          <p>Create your festival Spotify playlist.</p>
         </div>
       </div>
     </div>

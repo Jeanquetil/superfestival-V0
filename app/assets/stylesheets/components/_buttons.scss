@@ -13,6 +13,18 @@
   }
 }
 
+.active-day {
+  font-size:15px;
+  border: solid 1px $pink;
+  padding: 7px 10px;
+  letter-spacing: 1px;
+  border-radius: 30px;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+  color:white;
+    background-color: $pink;
+}
+
 .btn-spotify {
   font-size:15px;
   color: #24CF5F;

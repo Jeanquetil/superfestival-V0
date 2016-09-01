@@ -4,3 +4,5 @@ $('#timetable').append(events);
 
 var impossibleIds = <%= j @impossible_concerts.to_json %>;
 setImpossibleEvents(impossibleIds);
+
+location.reload();

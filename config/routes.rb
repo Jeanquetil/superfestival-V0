@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :festivals, only: :show
-  resources :concerts, only: [] do
-    resources :events, only: [:create, :destroy]
-  end
 
+
+  post 'concerts/:concert_id/events', to: 'festivals#create_event', as: :concert_events
+  delete 'concerts/:concert_id/events/:id', to: 'festivals#destroy_event', as: :concert_event
   get 'timetables', to: 'timetables#ics_export', defaults: { format: 'ics' }
   get 'timetables/playlists', to: 'timetables#get_playlist', as: :get_playlist
   get 'festivals/:festival_id/timetable/:day' => "festivals#display_timetable", as: :display_timetable

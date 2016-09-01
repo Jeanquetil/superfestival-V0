@@ -43,9 +43,9 @@ class EventsController < ApplicationController
      format.js
     end
     set_impossible_concerts(@event)
- end
+  end
 
- private
+  private
     # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params[:id])

@@ -37,10 +37,20 @@
   color: $pink;
 }
 
-#header-timetable-search{
-  margin-top: 65px;
-}
-
 #timetable-container{
   margin-top: -25px;
+}
+
+#flash_spotify{
+  position:absolute;
+  top:70px;
+}
+
+
+
+@media screen and (min-width: 1200px) {
+  #hits{
+  height: 70vh;
+  overflow: auto;
+  }
 }
