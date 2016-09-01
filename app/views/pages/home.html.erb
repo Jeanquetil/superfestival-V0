@@ -77,23 +77,27 @@
     });
   <% end %>
 
-<!--   <script>
+  <script>
   $(document).ready(function() {
       var tour = new Tour({
       orphan: true,
+      reflex: true,
+      backdrop: true,
       steps: [
       {
         orphan: true,
+        // backdrop: true,
         title: "Welcome to SuperFestival",
         content: "Let us help you getting ready for your next festival"
       },
       {
         placement: 'left',
+        backdrop: false,
+        reflex: true,
         element: "#login",
         title: "First, you need to create an account",
         content: "This will allow you to access all our features"
       },
-      next();
       {
         element: "#festiv",
         title: "First, click on your festival",
@@ -104,5 +108,5 @@
     tour.init();
     tour.start();
   });
-</script> -->
+</script>
 <% end %>

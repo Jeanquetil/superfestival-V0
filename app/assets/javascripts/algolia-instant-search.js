@@ -24,7 +24,7 @@ function app(opts) {
   search.addWidget(
     instantsearch.widgets.searchBox({
       container: '#search-input',
-      placeholder: 'Search for Concerts'
+      placeholder: 'Search by artist\'s name or genre'
     })
     );
 

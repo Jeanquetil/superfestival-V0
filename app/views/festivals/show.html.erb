@@ -11,7 +11,7 @@
             <div id="search-input"></div>
           </header>
         </div>
-        <div class="col-xs-12 col-lg-4">
+        <div class="col-xs-12 col-lg-4" id= "download">
           <% if user_signed_in? %>
             <div class="download">
               <%= link_to timetables_url(:festival => params[:id]), class: "btn-std text-center" do %>
@@ -50,12 +50,12 @@
         <script type="text/html" id="hit-template">
 
           <div class="hit" id="{{id}}">
-            <div class="hit-content">
+            <div class="hit-content" id="content">
               <h5><span class="box-shadow">{{ artist_name }}</h5></span>
               <p>{{ artist_genre}} // {{ start_hour }} - {{ end_hour }}</p>
               <div class="margin-tb-7-2">
                 <% if user_signed_in? %>
-                  <a href="{{ event_url }}" data-method="post" data-remote="true" data-tooltip="Add to my timetable"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                  <a href="{{ event_url }}" data-method="post" data-remote="true" data-tooltip="Add to my timetable"><i class="fa fa-plus" aria-hidden="true" id="add"></i></a>
                 <% end %>
                 {{#best_song}}
                   <audio id="music" preload="true" data-hit_id="{{id}}">
@@ -92,7 +92,6 @@
   }
 
   $(document).ready(function() {
-
     setTimeout(function(){
       if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
         setTimeout(clickfestival, 100)
@@ -101,8 +100,55 @@
       var impossibleIds = <%= j @impossible_concerts.to_json %>;
       setImpossibleEvents(impossibleIds);
 
-    }, 400)
+      var tour = new Tour({
+      orphan: true,
+      backdrop: true,
+      steps: [
+        {
+          placement: 'left',
+          element: "#timetable-container",
+          content: "They appear on your timetable on the right (of course your can remove them)"
+        },
+        {
+          placement: 'left',
+          element: "#timetable-container",
+          content: "They appear on your timetable on the right (of course your can remove them)"
+        },
+        {
+          prev: 2,
+          element: "#content",
+          placement: 'bottom',
+          title: "Discover new artists",
+          content: "Listen to their music and add them to your timetable"
+        },
+        {
+          placement: 'left',
+          element: "#timetable-container",
+          content: "They appear on your timetable on the right (of course your can remove them)"
+        },
+        {
+          placement: 'left',
+          element: "#download",
+          title: "Is your whole timetable ready ?",
+          content: "Adding it to your calendar and create your own personnalized spotify playlist"
+        },
+        {
+          orphan: true,
+          content: "It's your turn !! Live your SuperFestival !!"
+        }
+      ],
+      onStart: function (tour) {
+        tour.setCurrentStep(0);
+      }
+    });
+    tour.init();
+    console.log(tour);
+    tour.start();
+
   });
+
+    }, 400)
+
 </script>
 <script>
   window.onload = function() {
@@ -155,27 +201,5 @@
     });
   };
 </script>
-<!-- <script>
-  $(document).ready(function() {
-      var tour = new Tour({
-      orphan: true,
-      steps: [
-      {
-        orphan: true,
-        title: "Welcome to SuperFestival",
-        content: "Let us help you getting ready for your next festival"
-      },
-      {
-        placement: 'bottom',
-        element: "#notlog",
-        title: "You don't have an account",
-        content: "You must be logged in to create your timetable, please log in"
-      },
-      ]});
-
-    tour.init();
-    tour.start();
-  });
-</script> -->
 
 <% end %>
