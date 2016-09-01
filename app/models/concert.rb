@@ -30,6 +30,10 @@ class Concert < ApplicationRecord
       concert_day
     end
 
+    add_attribute :concert_week_day do
+      concert_week_day
+    end
+
     add_attribute :festival_begin do
       festival_begin
     end
@@ -64,6 +68,10 @@ class Concert < ApplicationRecord
   end
 
   def concert_day
+    day
+  end
+
+  def concert_week_day
     @festival_start = self.festival.start_date
     @day_of_concert = day
     @day_name = (@festival_start + @day_of_concert - 1).strftime("%A %d")
