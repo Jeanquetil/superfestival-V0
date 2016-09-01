@@ -93,34 +93,34 @@
         {
           placement: 'left',
           element: "#timetable-container",
-          content: "They appear on your timetable on the right (of course your can remove them)"
+          content: "#"
         },
         {
           placement: 'left',
           element: "#timetable-container",
-          content: "They appear on your timetable on the right (of course your can remove them)"
+          content: "#"
         },
         {
           prev: 2,
-          element: "#content",
+          element: '#<%= @festival.concerts[2].id %>',
           placement: 'bottom',
           title: "Discover new artists",
-          content: "Listen to their music and add them to your timetable"
+          content: "Listen to their best song and add the concert to your timetable"
         },
         {
           placement: 'left',
           element: "#timetable-container",
-          content: "They appear on your timetable on the right (of course your can remove them)"
+          content: "The concert will appear on your timetable - if you want to remove it, press x"
         },
         {
           placement: 'left',
           element: "#download",
-          title: "Is your whole timetable ready ?",
-          content: "Adding it to your calendar and create your own personnalized spotify playlist"
+          title: "Done with your timetable?",
+          content: "Click here to add it on your agenda or create your Spotify festival playlist!"
         },
         {
           orphan: true,
-          content: "It's your turn !! Live your SuperFestival !!"
+          content: "Your turn!\nEnjoy your SuperFestival!"
         }
       ],
       onStart: function (tour) {
