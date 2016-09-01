@@ -80,7 +80,7 @@ class FestivalsController < ApplicationController
     @impossible_concerts = []
     timetable.festival.timetables.each do |timetable|
       timetable.events.each do |event|
-        impossible_by_event = event.concert.festival.concerts.select('id').where("((? <= start_time AND start_time < ?)) OR (? < end_time AND end_time <= ?)", event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time)
+        impossible_by_event = event.concert.festival.concerts.select('id').where("(start_time <= ? AND end_time >= ?) OR (? <= start_time AND start_time < ?) OR (? < end_time AND end_time <= ?)", event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time)
         impossible_by_event.each do |concert|
           @impossible_concerts << concert.id
         end
