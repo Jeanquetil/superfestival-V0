@@ -6,7 +6,7 @@ class FestivalsController < ApplicationController
     session[:current_festival_id] = @festival.id
 
     if current_user
-      @timetables = @festival.timetables
+      @timetables = @festival.timetables.where(user: current_user)
       @timetable = current_user.find_or_create_timetable_for!(@festival, 1)
       set_timetable_parameters(@festival, 1)
       set_impossible_concerts(@timetable)
@@ -78,7 +78,7 @@ class FestivalsController < ApplicationController
 
   def set_impossible_concerts(timetable)
     @impossible_concerts = []
-    timetable.festival.timetables.each do |timetable|
+    timetable.festival.timetables.where(user: current_user).each do |timetable|
       timetable.events.each do |event|
         impossible_by_event = event.concert.festival.concerts.select('id').where("(start_time <= ? AND end_time >= ?) OR (? <= start_time AND start_time < ?) OR (? < end_time AND end_time <= ?)", event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time, event.concert.start_time, event.concert.end_time)
         impossible_by_event.each do |concert|
