@@ -30,13 +30,15 @@
          <div class="col-xs-12 col-lg-8" id="search-timetable-container">
           <header>
             <div id="concert_day" class="facet"></div>
-            <div id="pagination"></div>
           </header>
 
           <main>
             <div>
-              <div id="hits"></div>
-              <span id="festival_name" class="facet hidden"></span>
+              <div id="hits">
+                <div class="ais-hits">
+                </div>
+                <span id="festival_name" class="facet hidden"></span>
+              </div>
             </div>
           </main>
         </div>
@@ -47,28 +49,6 @@
         <!-- /INTERFACE -->
 
         <!-- TEMPLATES -->
-        <script type="text/html" id="hit-template">
-
-          <div class="hit" id="{{id}}">
-            <div class="hit-content">
-              <h5><span class="box-shadow">{{ artist_name }}</h5></span>
-              <p>{{ artist_genre}} // {{ start_hour }} - {{ end_hour }}</p>
-              <div class="margin-tb-7-2">
-                <% if user_signed_in? %>
-                  <a href="{{ event_url }}" data-method="post" data-remote="true" data-tooltip="Add to my timetable"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                <% end %>
-                {{#best_song}}
-                  <audio id="music" preload="true" data-hit_id="{{id}}">
-                    <source src="{{best_song}}"
-                         type='audio/mp3'>
-                    <p>Your user agent does not support this streaming feature</p>
-                  </audio>
-                  <span data-tooltip="Listen"><a id="pButton" class="play" data-button_id="{{id}}"></a></span>
-                {{/best_song}}
-              </div>
-            </div>
-          </div>
-        </script>
 
         <script type="text/html" id="no-results-template">
           <div id="no-results-message">
@@ -86,6 +66,15 @@
 
 <% content_for :after_js do %>
 <script>
+  app({
+    appId: ENV_ALGOLIA_ID,
+    apiKey: ENV_ALGOLIA_API_KEY,
+    indexName: 'Concert',
+    urlSync: true,
+    impossibleIds: <%= j @impossible_concerts.to_json %>,
+    festival: <%= @festival.id %>,
+  });
+
   function clickfestival() {
     $('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').click();
     $('a.ais-menu--link:contains("1")').parent().parent().click()
@@ -94,35 +83,29 @@
   $(document).ready(function() {
 
     setTimeout(function(){
-      if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))) {
-        setTimeout(clickfestival, 100)
+      if (!($('.ais-refinement-list--checkbox[value="<%== j @festival.name %>"]').is(':checked'))){
+        setTimeout(clickfestival, 50)
       }
-
-      var impossibleIds = <%= j @impossible_concerts.to_json %>;
-      setImpossibleEvents(impossibleIds);
-
-    }, 400)
+     }, 200)
   });
 </script>
 <script>
-  window.onload = function() {
+  $(document).ready(function() {
 
-    $.ajax({
-      type: 'GET',
-      url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + 1
-    });
 
-    setTimeout(function(){
-      $('div').on('click', ".ais-menu--link", function() { /* On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement */
+
+      $('div').on('click', ".ais-menu--link", function() {
+        // On écoute l'élément Parent .ais-menu--list et on déclenche une action au click sur l'élément enfant .ais-menu--link qui lui est généré dynamiquement
 
         var day = parseInt($(this).text().slice(0,1));
+
         $.ajax({
           type: 'GET',
           url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
+          });
         });
 
-      });
-
+    setTimeout(function(){
       if($('.ais-menu--list').children().hasClass('ais-menu--item__active')){
         var day = parseInt($('.ais-menu--item__active').text().slice(0,1));
 
@@ -130,10 +113,16 @@
           type: 'GET',
           url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + day
         });
-
+      }
+      else {
+        $.ajax({
+          type: 'GET',
+          url: '/festivals/' + <%= @festival.id %> +  '/timetable/' + 1
+        });
       };
+    }, 100);
 
-    }, 1000)
+
 
     $('#search-timetable-container').on('click', "#pButton", function(){
       var hit_id = $(this).data("button_id");
@@ -153,7 +142,7 @@
           pButton.className = "play";
         }
     });
-  };
+  });
 </script>
 <!-- <script>
   $(document).ready(function() {

@@ -1,4 +1,6 @@
+$('#event-<%= @event.id %>').remove();
+
 var impossibleIds = <%= j @impossible_concerts.to_json %>;
 setImpossibleEvents(impossibleIds);
 
-$('#event-<%= @event.id %>').remove();
+location.reload();
