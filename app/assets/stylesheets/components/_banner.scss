@@ -1,13 +1,12 @@
 .banner {
-  background-image: image-url("fond.png");
-  background-size: contain !important;
+  background-color: $iceberg;
   color: white;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   position:relative;
-  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
 }
 .banner h1 {
   font-size: 100px;
@@ -19,7 +18,7 @@
   letter-spacing: 4px;
   color: $pink;
   font-size: 3vh;
-  margin-top:50px;
+  margin-top:30px;
   font-weight:lighter;
   font-style:italic;
 }
@@ -39,13 +38,9 @@
 }
 
 .banner #typo {
-  width:70%;
+  width:70vw;
 }
 
-.banner #legend {
-  background-color: white;
-  box-shadow: 0px 0px 10px -3px #469ae0;
-  width: 70%;
-  margin: auto;
-  border-radius: 5px;
+.banner #top-waves {
+  margin-bottom:20px;
 }
