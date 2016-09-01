@@ -45,7 +45,12 @@
   position:absolute;
   top:70px;
 }
-#hits{
+
+
+
+@media screen and (min-width: 1200px) {
+  #hits{
   height: 70vh;
   overflow: auto;
+  }
 }
