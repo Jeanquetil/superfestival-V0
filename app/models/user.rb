@@ -30,6 +30,7 @@ class User < ApplicationRecord
     @timetable = Timetable.find_by(user: self, festival: festival, day: day)
     unless @timetable
       @timetable = Timetable.create!(user: self, festival: festival, day: day)
+      @timetable.update(day_week: (@timetable.festival.start_date + @timetable.day - 1).strftime("%A %d").to_s)
     end
     return @timetable
   end

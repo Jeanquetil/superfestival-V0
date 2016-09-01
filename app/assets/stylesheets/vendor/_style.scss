@@ -322,6 +322,9 @@ header img {
     color:white;
     background-color: $pink;
   }
+  &:before {
+    content: "Day ";
+  }
 }
 
 .ais-refinement-list--label:hover, .ais-refinement-list--item__active .ais-refinement-list--label,
